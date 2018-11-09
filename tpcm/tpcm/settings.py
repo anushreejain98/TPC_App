@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
          'NAME': 'TPCM',
         'USER': 'root',
-        'PASSWORD': 'aastha2004',
+        'PASSWORD': 'aastha2004yeah',
         'HOST': 'localhost',
         'PORT':'8000',
     
