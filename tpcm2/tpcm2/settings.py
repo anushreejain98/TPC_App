@@ -55,7 +55,11 @@ ROOT_URLCONF = 'tpcm2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD:tpcm2/tpcm2/settings.py
         'DIRS': [],
+=======
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+>>>>>>> 585c3f3e122d5fb11c4c34e36fd0a39530f80fb4:tpcm/tpcm/settings.py
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
