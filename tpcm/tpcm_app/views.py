@@ -5,8 +5,9 @@ import os
 
 
 def index(request):
-    template = loader.get_template("example.html")
     cwd = os.getcwd()
     print(cwd)
+    template = loader.get_template("example.html")
     return HttpResponse(template.render())
+
 
