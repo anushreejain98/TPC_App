@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'TPCM',
-        'USER': 'root',
-        'PASSWORD': 'aastha2004',
+        'USER': 'TPCMuser',
+        'PASSWORD': 'tpcm1234',
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
         'PORT': '8000',
     }
