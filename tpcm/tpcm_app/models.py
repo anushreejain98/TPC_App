@@ -6,20 +6,26 @@ from django.core.validators import RegexValidator
 class Student(models.Model):
     Name=models.CharField(max_length=30)
     Roll_no=models.CharField(max_length=8)
-    Department=models.CharField(max_length=30)
-    CPI=models.IntegerField()
+    CPI=models.DecimalField(max_digits=4,decimal_places=2)
+    Dept=models.CharField(max_length=30,default='-')
+    Course=models.CharField(max_length=30,default='-')
     Resume=models.URLField()
 
     def __str__(self):
         return self.Name
 
+
 class Company(models.Model):
+    A1='A1'
+    A2='A2'
+    B1='B1'
+    #Category_choices=((A1,'A1'),(A2,'A2'),(B1,'B1'),)
+
     Name = models.CharField(max_length=30)
-    Category=models.CharField(max_length=2)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
-                                 message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    HR_contact = models.CharField(validators=[phone_regex], max_length=17,
-                                    blank=True)  # validators should be a list  JAF_link=models.URLField(null=True)
+    Category=models.CharField(max_length=2,default='B1')
+    HR_name = models.CharField(max_length=30,default='-')
+    HR_contact = models.EmailField(max_length=100,unique=True)
+    Sector=models.CharField(max_length=30, default='IT')
 
     def __str__(self):
         return self.Name
