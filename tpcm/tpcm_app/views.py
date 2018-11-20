@@ -1,13 +1,21 @@
+
+
 from django.shortcuts import render
-from django.template import Context, loader
-from django.http import HttpResponse
 import os
 
+from django.views import generic
+from django.views.generic.edit import CreateView,UpdateView, DeleteView
 
-def index(request):
-    cwd = os.getcwd()
-    print(cwd)
-    template = loader.get_template("example.html")
-    return HttpResponse(template.render())
+from .models import Student,Company
 
+#class DetailView(generic.DetailView):
+#   template_name = 'home.html'
 
+def detail(request):
+	return render(request,'home.html')
+
+def stud(request):
+	return render(request,'student.html')
+ 
+def cmp(request):
+	return render(request,'company.html')
