@@ -23,13 +23,11 @@
         
 	</head>
 	<style>
-	img {
-		opacity: 0.25;
+	img{
 		filter: alpha(opacity=44); /* For IE8 and earlier */
 		display: block;
 		margin-left: auto;
         margin-right: auto;
-        height: 450px;
 	}
 	h2{
 		font-weight:270;
@@ -54,7 +52,7 @@
 							<a class="page-scroll" href="/tpcm_app/">Home</a>
 						</li>
                         <li>
-                                <a class="page-scroll" href="/tpcm_app/login/type">{{username}}</a>
+                                <a class="page-scroll" href="/tpcm_app/student/profile">{{username}}</a>
                         </li>
                         <li>
                                 <a class="page-scroll" href="/tpcm_app/signout">Sign out</a>
@@ -65,7 +63,7 @@
 		</nav>
 	</body>
 	<div>
-		<a ><img src="/static/logo.png" class="center" ></a>
+		<a ><img src="/static/logo.png" class="center" style="opacity:0.25; height: 450px;" ></a>
 		<h3>
 		{% block body %}
 		{% endblock %}
