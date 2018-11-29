@@ -12,9 +12,10 @@ class StudentSignUpForm(UserCreationForm):
     dept = forms.CharField(label="Department")
     course = forms.CharField(label="Course of study")
     resume = forms.URLField(label="URL to resume")
+    email = forms.EmailField(label="Webmail ID")
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("id", "name", "cpi", "dept", "course", "resume","password1", "password2")
+        fields = ("id", "name", "cpi", "dept", "course", "resume", "email", "password1", "password2")
 
     @transaction.atomic
     def save(self):
@@ -28,6 +29,7 @@ class StudentSignUpForm(UserCreationForm):
         student.dept = self.cleaned_data["dept"]
         student.course = self.cleaned_data["course"]
         student.resume = self.cleaned_data["resume"]
+        student.email = self.cleaned_data["email"]
         student.save()
         return user
 
@@ -67,3 +69,35 @@ class CompanyLoginForm(AuthenticationForm):
     username = forms.CharField(label= "Company ID")
     def confirm_login_allowed(self, user):
         pass
+
+class StudentUpdateProfile(forms.ModelForm):
+    name = forms.CharField(label="Full Name", required=False)
+    cpi = forms.DecimalField(label="Current CPI", required=False)
+    dept = forms.CharField(label="Department", required=False)
+    course = forms.CharField(label="Course of study", required=False)
+    resume = forms.URLField(label="URL to resume", required=False)
+    email = forms.EmailField(label="Webmail ID", required=False)
+
+    class Meta:
+        model = User
+        fields = ('name', 'cpi', 'dept', 'course', 'resume', 'email')
+
+    def clean_email(self):
+        if not self.cleaned_data["email"]:
+            return None
+        name = self.cleaned_data.get('name')
+        email = self.cleaned_data.get('email')
+
+        if email and Student.objects.filter(email=email).count():
+            raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
+        return email
+    
+    @transaction.atomic
+    def save(self, commit=True):
+        user = super(UserCreationForm.RegistrationForm, self).save(commit=False)
+        if self.cleaned_data['email']:
+            user.student.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+            user.student.save()
+        return user
