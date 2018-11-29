@@ -13,13 +13,14 @@
                 <form method="post">
                         {% csrf_token %}
                         {{ form.as_p}}
+                        <div class="social-btns" style="position: absolute; right:750px; top:500px">
+                                <button type="submit">
+                                    <a class="ln slogin"> <i class="fa">Signup</i></a>
+                                </button>
+                         </div> 
                 </form>
             </div>
     </div>
-    <button type="submit">
-            <div class="social-btns" style="top:500px">
-                <a class="ln slogin"> <i class="fa">Signup</i></a>
-            </div> 
-    </button>
+    
         
 {% endblock %}

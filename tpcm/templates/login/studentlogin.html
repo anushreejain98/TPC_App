@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div style="position:relative; bottom:20px"><center>
+<div style="position:relative; bottom:50px"><center>
         <h2>Student Login</h2>
 </center></div>
 <style>
@@ -18,17 +18,14 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p}}
+                <div class="social-btns" style="position:realtive; top:200px">
+                        <button type="submit">
+                            <a class="ln slogin"> <i class="fa">Login</i></a>
+                        </button>
+                        </div> 
             </form>
             </td>
         </tr>
-        <tr>
-            <button type="submit">
-                <div class="social-btns" style="position:realtive; top:280px">
-                    <a class="ln slogin"> <i class="fa">Login</i></a>
-                </div> 
-            </button>
-        </tr>
-        
-
 </table>
+        
 {% endblock %}

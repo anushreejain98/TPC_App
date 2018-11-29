@@ -13,7 +13,18 @@ from django.contrib.auth import authenticate, login, logout
 #   template_name = 'home.html'
 
 def detail(request):
-    return render(request,'home.html')
+    template_name = 'home.html'
+    student_template = 'studhome.html'
+    company_template = 'comphome.html'
+    if request.user.is_authenticated:
+        if request.user.is_student:
+            template_name = student_template
+            return render(request, template_name, context={"username":request.user.student.name})
+        else:
+            template_name = company_template
+            return render(request, template_name, context={"username":request.user.company.name})
+
+    return render(request,template_name)
 
 def login_type(request):
     return render(request,'login/logintype.html')
