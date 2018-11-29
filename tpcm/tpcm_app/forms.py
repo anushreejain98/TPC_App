@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db import transaction
 
 from .models import Student, User, Company
+import datetime
 
 class StudentSignUpForm(UserCreationForm):
     id = forms.CharField(label= "Roll Number")
@@ -53,6 +54,7 @@ class CompanySignUpForm(UserCreationForm):
         company.hr_name = self.cleaned_data["hr_name"]
         company.hr_contact = self.cleaned_data["hr_contact"]
         company.sector = self.cleaned_data["sector"]
+        company.date_of_visit = datetime.date.today()
         company.save()
         return user
 

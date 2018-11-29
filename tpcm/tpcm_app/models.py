@@ -20,6 +20,7 @@ class Student(models.Model):
     dept=models.CharField(max_length=30,default='-')
     course=models.CharField(max_length=30,default='-')
     resume=models.URLField()
+    avatar = models.ImageField(upload_to='images/', default='images/default.png')
 
     def __str__(self):
         return self.Name
@@ -36,6 +37,7 @@ class Company(models.Model):
     hr_name = models.CharField(max_length=30,default='-')
     hr_contact = models.EmailField(max_length=100,unique=True)
     sector = models.CharField(max_length=30, default='IT')
+    date_of_visit = models.DateField(null=True)
 
     def __str__(self):
         return self.Name
