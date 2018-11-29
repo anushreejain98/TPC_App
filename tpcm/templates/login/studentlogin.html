@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div style="position:relative; bottom:20px"><center>
+        <h2>Student Login</h2>
+</center></div>
+<style>
+        table.center {
+       margin-left:auto; 
+       margin-right:auto;
+       position: relative;
+       bottom:20px;
+     }
+</style>
+<table class="center">
+        <tr>
+            <td>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p}}
+            </form>
+            </td>
+        </tr>
+        <tr>
+            <button type="submit">
+                <div class="social-btns" style="position:realtive; top:280px">
+                    <a class="ln slogin"> <i class="fa">Login</i></a>
+                </div> 
+            </button>
+        </tr>
+        
+
+</table>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+        table.center {
+       margin-left:auto; 
+       margin-right:auto;
+       position: relative;
+       bottom:20px;
+     }
+</style>
+<div style="position:relative; bottom:30px"><center>
+        <h2>Company Login</h2>
+</center></div>
+
+    <table class="center">
+        <tr>
+            <td>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p}}
+            </form>
+            </td>
+        </tr>
+        <tr>
+            <button type="submit">
+                <div class="social-btns" style="position:realtive; top:250px">
+                    <a class="ln clogin"> <i class="fa">Login</i></a>
+                </div> 
+            </button>
+        </tr>
+        
+
+    </table>
+    
+    
+
+{% endblock %}
