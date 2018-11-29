@@ -1,72 +1,80 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}TPC MANAGEMENT APP{% endblock %}</title>
-        <!--loads static files-->
-{% load staticfiles %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-    {% block style %}
-{% endblock %}
-</style>
-</head>
-<body  style="background-image: linear-gradient(rgba(234, 231, 226, 0) 30%, #eae7e2), linear-gradient(70deg, #b4dafb 32%, #fdf1b9);
-    border-bottom-color: #eae7e2; 
-    color: #234059;">
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <!--header-->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-                <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/tpcm_app">Home</a>
-        </div>
-        <!--items-->
-        <div class="collapse navbar-collapse" id="topNavBar">
-
-            <ul class="nav navbar-nav">
-                <li >
-                     <a href="/tpcm_app/student">
-                         <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;Student
-                     </a>
-                </li>
-                 <li>
-                     <a href="/tpcm_app/company">
-                         <span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp;Company
-                     </a>
-                </li>
-            </ul>
-
-            <form class="navbar-form navbar-left" role="search" method="get" action="#">
-                <div class="form-group">
-                <input type="text" class="form-control" name="q" value="">
-                </div>
-                <button type="button" class="btn btn-default">Search</button>
-            </form>
-
-            <ul class="nav navbar-nav navbar-right">
-                 <li class="">
-                     <a href="#">
-                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add feedback
-                     </a>
-                </li>
-                <li class="">
-                     <a href="#">
-                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
-                     </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-{% block body %}
-{% endblock %}
-</body>
+	<head>
+        <meta charset="utf-8">
+        <title>TPC Management System</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="/static/bootstrap.min.js"></script>
+		<script src="/static/SmoothScroll.js"></script>
+        <script src="/static/theme-scripts.js"></script>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="favicon.ico">
+		<!-- Bootstrap core CSS -->
+		<link href="/static/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<!-- Custom styles for this template -->
+        <link href="/static/style.css" rel="stylesheet">
+        <link href="/static/btns.css" rel="stylesheet">
+        
+	</head>
+	<style>
+	img {
+		opacity: 0.25;
+		filter: alpha(opacity=44); /* For IE8 and earlier */
+		display: block;
+		margin-left: auto;
+        margin-right: auto;
+        height: 450px;
+	}
+	h2{
+		font-weight:270;
+	}
+    h3{ 
+    position: absolute; 
+    top: 200px; 
+    left: 0; 
+    width: 100%; 
+    }
+	</style>
+	
+	<body id="page-top">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="hidden">
+							<a href="#page-top"></a>
+						</li>
+						<li>
+							<a class="page-scroll" href="/tpcm_app/">Home</a>
+						</li>
+						<li>
+							<a class="page-scroll" href="/tpcm_app/login/type">Log in</a>
+						</li>
+						<li>
+							<a class="page-scroll" href="/tpcm_app/signup/type">Sign up</a>
+						</li>
+						<li>
+							<a class="page-scroll" href="#contact">Contact</a>
+						</li>
+					</ul>
+                </div >
+                <!-- /.navbar-collapse -->
+		</nav>
+	</body>
+	<div>
+		<a ><img src="/static/logo.png" class="center" ></a>
+		<h3>
+		{% block body %}
+		{% endblock %}
+		</h3>
+	</div>
 </html>
