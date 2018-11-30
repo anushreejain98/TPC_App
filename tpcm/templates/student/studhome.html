@@ -5,12 +5,10 @@
 <table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
 			<th>Company Name</th>
-			<th>Date of Visit</th>
 		</tr>
 		{% for item in query %}
 		<tr> 
 			<td>{{item.name}}</td>
-			<td>{{item.date_of_visit}}</td>
 		</tr>
 		{% endfor %}
 </table>

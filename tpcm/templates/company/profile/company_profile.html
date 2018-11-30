@@ -1,0 +1,130 @@
+{% extends 'company/compbase.html' %}
+
+{% block body %}
+<style type="text/css">
+	#ProfilePage
+	{
+		/* Move it off the top of the page, then centre it horizontally */
+		margin: 50px auto;
+		width: 675px;
+	
+	/* For visibility. Delete me */
+	border: 1px solid black;
+	}
+	
+	#LeftCol
+	{
+		/* Move it to the left */
+		float: left;
+	
+		width: 200px;
+		text-align: center;
+	
+		/* Move it away from the content */
+		margin-right: 30px;
+		margin-left: 30px;
+		margin-top: 40px;
+	
+	/* For visibility. Delete me */
+	border: 1px solid brown;
+	}
+	
+	#Photo
+	{
+		/* Width and height of photo container */
+		width: 200px;
+		height: 200px;
+	
+	/* For visibility. Delete me */
+	
+	}
+	
+	#PhotoOptions
+	{
+		text-align: center;
+		width: 200px;
+	
+	/* For visibility. Delete me */
+	border: 1px solid black;
+	}
+	
+	#Info
+	{
+		width: 400px;
+		text-align: center;
+	
+		/* Move it to the right */
+		float: right;
+	
+	/* For visibility. Delete me */
+    border: 1px solid grey;
+    
+	}
+	
+	#Info strong
+	{
+		/* Give it a width */
+		display: inline-block;
+		width: 100px;
+	
+	/* For visibility. Delete me */
+	/*border: 1px solid orange; */
+	}
+	
+	#Info span
+	{
+		/* Give it a width */
+		display: inline-block;
+		width: 250px;
+	
+	/* For visibility. Delete me */
+    border: 1px solid grey;
+    background-color:white;
+	}
+	.space { margin-top: 400px; }
+
+	
+	</style>
+	<body id="page-top" >
+			
+		<div id="ProfilePage">
+
+		
+			<div id="Info">
+				<br>
+				<p>
+					<strong>Company Name: </strong>
+					<span>{{user.company.name}}</span>
+				</p>
+				<br>
+				<p>
+					<strong>Company ID: </strong>
+					<span>{{user.username}}</span>
+				</p><br>
+				<p>
+					<strong>HR name:&nbsp;&nbsp;</strong>
+					<span>{{user.company.hr_name}}</span>
+				</p><br>
+				<p>
+					<strong>HR_contact: </strong>
+					<span>{{user.company.hr_contact}}</span>
+				</p><br>
+				<p>
+					<strong>Category: </strong>
+					<span>{{user.company.category}}</span>
+                </p><br>
+                <p>
+					<strong>Sector:</strong>
+					<span>{{user.company.sector}}</span>
+				</p><br>
+			</div>
+		
+			<!-- Needed because other elements inside ProfilePage have floats -->
+			<div style="clear:both"></div>
+        </div>
+        <div class="social-btns" style="position:relative;">
+                <div class="social-btns" style="position:relative;">
+            <a class="btn twitter" href="/tpcm_app/company/profile/update" ><i class="fa">Update</i></a>
+        </div>
+	</body>
+{% endblock %}

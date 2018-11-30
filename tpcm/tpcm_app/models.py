@@ -20,6 +20,7 @@ class Student(models.Model):
     resume=models.URLField()
     webmail = models.EmailField(max_length=100, unique=True)
     avatar = models.ImageField(upload_to='images/', default='images/default.png')
+    email = None
 
     def __str__(self):
         return self.name
@@ -36,7 +37,11 @@ class Company(models.Model):
     hr_name = models.CharField(max_length=30,default='-')
     hr_contact = models.EmailField(max_length=100,unique=True)
     sector = models.CharField(max_length=30, default='IT')
+<<<<<<< HEAD
     
+=======
+    email = None
+>>>>>>> Edit profiles for student and company
 
     def __str__(self):
         return self.name

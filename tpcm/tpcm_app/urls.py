@@ -23,5 +23,8 @@ urlpatterns = [
     path('signout/', auth_views.LogoutView.as_view(template_name="home.html"), name='signout'),
     path('student/profile/update', views.student_update_profile, name='student_update'),
     path('student/profile', views.student_profile, name='student_profile'),
+    path('contact/', views.contact, name='contact'),
+    path('company/profile/update', views.company_update_profile, name='company_update'),
+    path('company/profile', views.company_profile, name='company_profile'),
     path('company/createjob',views.CreatePositionView.as_view(),name='cmp_createjob'),
 ]

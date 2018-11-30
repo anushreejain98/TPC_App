@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.db import transaction
 
 from .models import Student, User, Company, JobPosition
@@ -29,7 +29,7 @@ class StudentSignUpForm(UserCreationForm):
         student.dept = self.cleaned_data["dept"]
         student.course = self.cleaned_data["course"]
         student.resume = self.cleaned_data["resume"]
-        student.email = self.cleaned_data["webmail"]
+        student.webmail = self.cleaned_data["webmail"]
         student.save()
         return user
 
@@ -70,24 +70,13 @@ class CompanyLoginForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
         pass
 
-class StudentUpdateProfile(forms.ModelForm):
-    name = forms.CharField(label= "Full Name", required=False)
-    cpi = forms.DecimalField(label="Current CPI", required=False)
-    dept = forms.CharField(label="Department", required=False)
-    course = forms.CharField(label="Course of study", required=False)
-    resume = forms.URLField(label="URL to resume", required=False)
-    webmail = forms.EmailField(label="Webmail ID", required=False)
+class EditStudentForm(UserChangeForm):
+    password = None
     class Meta:
-        model = User
-        fields = ('name', 'cpi', 'dept', 'course', 'resume', 'webmail')
+        model = Student
+        fields = ("name", "cpi", "dept", "course", "resume", "avatar")
 
-    def clean_email(self):
-        webmail = self.cleaned_data.get('webmail')
-
-        if webmail and Student.objects.filter(webmail='webmail').count():
-            raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
-        return webmail
-
+<<<<<<< HEAD
     def save(self, commit=True):
         user = super(StudentUpdateProfile, self).save(commit=False)
         user.student.webmail = self.clean_email()
@@ -126,3 +115,10 @@ class CreatePositionForm(forms.ModelForm):
                 'stipend','ctc','test_date')
 
 
+=======
+class EditCompanyForm(UserChangeForm):
+    password = None
+    class Meta:
+        model = Company
+        fields = ("hr_name", "hr_contact", "category", "sector")
+>>>>>>> Edit profiles for student and company

@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.template import RequestContext
 from .models import Student, User, Company, JobPosition
 from .forms import StudentSignUpForm, CompanySignUpForm, StudentUpdateProfile,CreatePositionForm
+from .models import Student, User, Company
+from .forms import EditStudentForm, EditCompanyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
 
@@ -30,7 +32,8 @@ def detail(request):
             return render(request, template_name, context={"username":request.user.company.name})
 
     return render(request,template_name)
-
+def contact(request):
+    return render(request, 'contact.html')
 def login_type(request):
     return render(request,'login/logintype.html')
 
@@ -40,18 +43,36 @@ def signup_type(request):
 def student_profile(request):
     return render(request, 'student/profile/student_profile.html')
 
+def company_profile(request):
+    return render(request, 'company/profile/company_profile.html')
+
 def student_update_profile(request):
-    args = {}
+    args={}
+    stud = request.user.student
     if request.method == 'POST':
-        form = StudentUpdateProfile(request.POST, instance=request.user)
+        form = EditStudentForm(request.POST, instance=stud)
         if form.is_valid():
             form.save()
             return render(request, 'student/profile/profile_updated.html')
     else:
-        form = StudentUpdateProfile()
+        form = EditStudentForm(instance=stud)
 
     args['form'] = form
     return render(request, 'student/profile/student_update_profile.html', args)
+
+def company_update_profile(request):
+    args={}
+    comp = request.user.company
+    if request.method == 'POST':
+        form = EditCompanyForm(request.POST, instance=comp)
+        if form.is_valid():
+            form.save()
+            return render(request, 'company/profile/profile_updated.html')
+    else:
+        form = EditCompanyForm(instance=comp)
+
+    args['form'] = form
+    return render(request, 'company/profile/company_update_profile.html', args)
 
 class StudentSignUpView(CreateView):
     model = User
