@@ -104,7 +104,7 @@
 				<br>
 				<p>
 					<strong>Roll no: </strong>
-					<span>{{user.id}}</span>
+					<span>{{user.username}}</span>
 				</p><br>
 				<p>
 					<strong>Department:&nbsp;&nbsp;</strong>
@@ -122,6 +122,10 @@
 		
 			<!-- Needed because other elements inside ProfilePage have floats -->
 			<div style="clear:both"></div>
-		</div>
+        </div>
+        <div class="social-btns" style="position:relative;">
+                <div class="social-btns" style="position:relative;">
+            <a class="btn twitter" href="/tpcm_app/student/profile/update" ><i class="fa">Update</i></a>
+        </div>
 	</body>
 {% endblock %}

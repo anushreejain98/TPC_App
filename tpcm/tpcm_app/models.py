@@ -3,15 +3,11 @@ from django.utils import timezone
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 
-from .managers import UserManager
 # Create your models here.
 
 class User(AbstractUser):
-    id = models.CharField(max_length=8, unique=True, primary_key=True)
     is_student = models.BooleanField(default=False)
     is_company = models.BooleanField(default=False)
-    USERNAME_FIELD = 'id'
-    objects = UserManager()
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -20,10 +16,11 @@ class Student(models.Model):
     dept=models.CharField(max_length=30,default='-')
     course=models.CharField(max_length=30,default='-')
     resume=models.URLField()
+    webmail = models.EmailField(max_length=100, unique=True)
     avatar = models.ImageField(upload_to='images/', default='images/default.png')
 
     def __str__(self):
-        return self.Name
+        return self.name
 
 
 class Company(models.Model):
@@ -40,7 +37,7 @@ class Company(models.Model):
     date_of_visit = models.DateField(null=True)
 
     def __str__(self):
-        return self.Name
+        return self.name
 
 
 

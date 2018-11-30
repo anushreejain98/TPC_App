@@ -1,14 +1,14 @@
 from django.shortcuts import redirect, render, render_to_response
 from django.contrib.auth import login
 import os
-
+from django.contrib.auth import views as auth_views
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.template import RequestContext
-from .models import Student, User
+from .models import Student, User, Company
 from .forms import StudentSignUpForm, CompanySignUpForm, StudentUpdateProfile
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.contrib.auth.views import LoginView
 
 #class DetailView(generic.DetailView):
 #   template_name = 'home.html'
@@ -20,7 +20,11 @@ def detail(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             template_name = student_template
-            return render(request, template_name, context={"username":request.user.student.name})
+            query = Company.objects.all().values()
+            return render(request, template_name, context={
+                "username":request.user.student.name,
+                "query":query,
+                })
         else:
             template_name = company_template
             return render(request, template_name, context={"username":request.user.company.name})
@@ -29,19 +33,20 @@ def detail(request):
 
 def login_type(request):
     return render(request,'login/logintype.html')
+
 def signup_type(request):
     return render(request, 'signup/signuptype.html')
+
 def student_profile(request):
     return render(request, 'student/profile/student_profile.html')
+
 def student_update_profile(request):
     args = {}
-
     if request.method == 'POST':
         form = StudentUpdateProfile(request.POST, instance=request.user)
-        form.actual_user = request.user
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('student/profile/profile_updated.html')
+            return render(request, 'student/profile/profile_updated.html')
     else:
         form = StudentUpdateProfile()
 
@@ -76,5 +81,7 @@ class CompanySignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('/tpcm_app/')
+
+
 
 
