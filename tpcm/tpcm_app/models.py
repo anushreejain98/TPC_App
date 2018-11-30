@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 
+from multiselectfield import MultiSelectField
+
 # Create your models here.
 
 class User(AbstractUser):
@@ -34,20 +36,20 @@ class Company(models.Model):
     hr_name = models.CharField(max_length=30,default='-')
     hr_contact = models.EmailField(max_length=100,unique=True)
     sector = models.CharField(max_length=30, default='IT')
-    date_of_visit = models.DateField(null=True)
+    
 
     def __str__(self):
         return self.name
 
 class JobPosition(models.Model):
-    DEPT=(("CSE","Computer Science"),
-        ("EE","Electrical"),
-        ("ME","Mechanical"),
-        ("CE","Civil Engg."),
-        ("CB","Chemical Engg."),)
+    DEPT=(('1','Computer Science'),
+        ('2','Electrical'),
+        ('3','Mechanical'),
+        ('4','Civil Engg.'),
+        ('5','Chemical Engg.'),)
 
-    COURSE=[('btech','B. Tech'),
-            ('mtech','M. Tech'),]
+    COURSE=(('btech','B. Tech'),
+            ('mtech','M. Tech'),)
 
     pos_name=models.CharField(max_length=30)
     branch_appl=models.CharField(max_length=30,choices=DEPT)
@@ -58,7 +60,7 @@ class JobPosition(models.Model):
     stipend=models.IntegerField(null=True)
     ctc=models.IntegerField(null=True)
     test_date=models.DateField(null=True)
-    cmp_name=models.ForeignKey(Company,on_delete=models.CASCADE,)
+    cmp_name=models.ForeignKey(Company,on_delete=models.CASCADE,default='company')
 
     def __str__(self):
         return self.pos_name + '   ' + self.cmp_name

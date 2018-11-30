@@ -101,17 +101,17 @@ class StudentUpdateProfile(forms.ModelForm):
 
 
 class CreatePositionForm(forms.ModelForm):
-    DEPT=(("CSE","Computer Science"),
-        ("EE","Electrical"),
-        ("ME","Mechanical"),
-        ("CE","Civil Engg."),
-        ("CB","Chemical Engg."),)
+    DEPT=[('1','Computer Science'),
+        ('2','Electrical'),
+        ('3','Mechanical'),
+        ('4','Civil Engg.'),
+        ('5','Chemical Engg.'),]
 
     COURSE=[('btech','B. Tech'),
             ('mtech','M. Tech'),]
             
     pos_name=forms.CharField(label="Job Position")
-    branch_appl=forms.CharField(widget=forms.CheckboxSelectMultiple(choices=DEPT))
+    branch_appl=forms.CharField(widget=forms.Select(choices=DEPT))
                                         
     cpi_req=forms.DecimalField(label="Min. CPI required")
     course_appl=forms.CharField(label="Select Course",

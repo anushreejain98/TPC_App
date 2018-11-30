@@ -101,7 +101,8 @@ class CreatePositionView(CreateView):
                 stipend = form.cleaned_data.get('stipend')
                 ctc = form.cleaned_data.get('ctc')
                 test_date = form.cleaned_data.get('test_date')
-                # do something with your results
+                cmp_name= request.user.company
+                # do something . your results
                 form.save()
                 return redirect('/tpcm_app/company')
 
