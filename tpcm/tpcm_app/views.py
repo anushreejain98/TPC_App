@@ -6,7 +6,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.template import RequestContext
 from .models import Student, User, Company, JobPosition
-from .forms import StudentSignUpForm, CompanySignUpForm, StudentUpdateProfile,CreatePositionForm
+from .forms import StudentSignUpForm, CompanySignUpForm, CreatePositionForm
 from .models import Student, User, Company
 from .forms import EditStudentForm, EditCompanyForm
 from django.contrib.auth import authenticate, login, logout

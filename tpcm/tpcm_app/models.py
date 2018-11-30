@@ -3,8 +3,6 @@ from django.utils import timezone
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 
-from multiselectfield import MultiSelectField
-
 # Create your models here.
 
 class User(AbstractUser):
@@ -37,11 +35,7 @@ class Company(models.Model):
     hr_name = models.CharField(max_length=30,default='-')
     hr_contact = models.EmailField(max_length=100,unique=True)
     sector = models.CharField(max_length=30, default='IT')
-<<<<<<< HEAD
-    
-=======
     email = None
->>>>>>> Edit profiles for student and company
 
     def __str__(self):
         return self.name
