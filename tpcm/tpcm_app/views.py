@@ -5,8 +5,8 @@ from django.contrib.auth import views as auth_views
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.template import RequestContext
-from .models import Student, User, Company
-from .forms import StudentSignUpForm, CompanySignUpForm, StudentUpdateProfile
+from .models import Student, User, Company, JobPosition
+from .forms import StudentSignUpForm, CompanySignUpForm, StudentUpdateProfile,CreatePositionForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
 
@@ -85,3 +85,30 @@ class CompanySignUpView(CreateView):
 
 
 
+class CreatePositionView(CreateView):
+    model = JobPosition
+    form_class = CreatePositionForm
+    template_name = 'company/createjob.html'
+
+    def job_pos_view(request):
+        if request.method == 'POST':
+            form = CreatePositionForm(request.POST)
+            if form.is_valid():
+                pos_name = form.cleaned_data.get('pos_name')
+                branch_appl = form.cleaned_data.get('branch_appl')
+                cpi_req = form.cleaned_data.get('cpi_req')
+                course_appl = form.cleaned_data.get('course_appl')
+                stipend = form.cleaned_data.get('stipend')
+                ctc = form.cleaned_data.get('ctc')
+                test_date = form.cleaned_data.get('test_date')
+                # do something with your results
+                form.save()
+                return redirect('/tpcm_app/company')
+
+        else:
+            form = CreatePositionForm()
+
+        return render_to_response(template_name, {'form':form },
+            context_instance=RequestContext(request))
+
+    

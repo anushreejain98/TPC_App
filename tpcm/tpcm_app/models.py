@@ -39,5 +39,30 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+class JobPosition(models.Model):
+    DEPT=(("CSE","Computer Science"),
+        ("EE","Electrical"),
+        ("ME","Mechanical"),
+        ("CE","Civil Engg."),
+        ("CB","Chemical Engg."),)
+
+    COURSE=[('btech','B. Tech'),
+            ('mtech','M. Tech'),]
+
+    pos_name=models.CharField(max_length=30)
+    branch_appl=models.CharField(max_length=30,choices=DEPT)
+                                       
+    cpi_req=models.DecimalField(max_digits=4,decimal_places=2, default='0')
+    course_appl=models.CharField(max_length=30,choices=COURSE)
+                                
+    stipend=models.IntegerField(null=True)
+    ctc=models.IntegerField(null=True)
+    test_date=models.DateField(null=True)
+    cmp_name=models.ForeignKey(Company,on_delete=models.CASCADE,)
+
+    def __str__(self):
+        return self.pos_name + '   ' + self.cmp_name
+
+
 
 
