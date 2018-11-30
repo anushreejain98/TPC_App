@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db import transaction
-from .models import Student, User, Company
+
+from .models import Student, User, Company, JobPosition
 import datetime
 
 class StudentSignUpForm(UserCreationForm):
@@ -97,3 +98,31 @@ class StudentUpdateProfile(forms.ModelForm):
         user.student.course = self.cleaned_data.get('course')
         user.save()
         return user
+
+
+class CreatePositionForm(forms.ModelForm):
+    DEPT=(("CSE","Computer Science"),
+        ("EE","Electrical"),
+        ("ME","Mechanical"),
+        ("CE","Civil Engg."),
+        ("CB","Chemical Engg."),)
+
+    COURSE=[('btech','B. Tech'),
+            ('mtech','M. Tech'),]
+            
+    pos_name=forms.CharField(label="Job Position")
+    branch_appl=forms.CharField(widget=forms.CheckboxSelectMultiple(choices=DEPT))
+                                        
+    cpi_req=forms.DecimalField(label="Min. CPI required")
+    course_appl=forms.CharField(label="Select Course",
+                                widget=forms.Select(choices=COURSE))
+    stipend=forms.IntegerField(label="Stipend")
+    ctc=forms.IntegerField(label="CTC")
+    test_date=forms.DateField(label="Online Test Date")
+    
+    class Meta:
+        model = JobPosition
+        fields = ('pos_name', 'branch_appl', 'cpi_req', 'course_appl',
+                'stipend','ctc','test_date')
+
+
