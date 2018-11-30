@@ -76,18 +76,6 @@ class EditStudentForm(UserChangeForm):
         model = Student
         fields = ("name", "cpi", "dept", "course", "resume", "avatar")
 
-<<<<<<< HEAD
-    def save(self, commit=True):
-        user = super(StudentUpdateProfile, self).save(commit=False)
-        user.student.webmail = self.clean_email()
-        user.student.name = self.cleaned_data.get('name')
-        user.student.cpi = self.cleaned_data.get('cpi')
-        user.student.resume = self.cleaned_data.get('resume')
-        user.student.dept = self.cleaned_data.get('dept')
-        user.student.course = self.cleaned_data.get('course')
-        user.save()
-        return user
-
 
 class CreatePositionForm(forms.ModelForm):
     DEPT=[('1','Computer Science'),
@@ -115,10 +103,8 @@ class CreatePositionForm(forms.ModelForm):
                 'stipend','ctc','test_date')
 
 
-=======
 class EditCompanyForm(UserChangeForm):
     password = None
     class Meta:
         model = Company
         fields = ("hr_name", "hr_contact", "category", "sector")
->>>>>>> Edit profiles for student and company
