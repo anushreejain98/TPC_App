@@ -25,13 +25,11 @@ class Student(models.Model):
 
 
 class Company(models.Model):
-    A1='A1'
-    A2='A2'
-    B1='B1'
-    #Category_choices=((A1,'A1'),(A2,'A2'),(B1,'B1'),)
+
+    Category_choices=(('A1','A1'),('A2','A2'),('B1','B1'),)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=30)
-    category = models.CharField(max_length=2,default='B1')
+    category = models.CharField(max_length=2,default='B1',choices=Category_choices)
     hr_name = models.CharField(max_length=30,default='-')
     hr_contact = models.EmailField(max_length=100,unique=True)
     sector = models.CharField(max_length=30, default='IT')
@@ -41,6 +39,10 @@ class Company(models.Model):
         return self.name
 
 class JobPosition(models.Model):
+
+    class Meta:
+        unique_together=(('cmp_name','pos_name'),)
+
     DEPT=(('1','Computer Science'),
         ('2','Electrical'),
         ('3','Mechanical'),
@@ -50,7 +52,7 @@ class JobPosition(models.Model):
     COURSE=(('btech','B. Tech'),
             ('mtech','M. Tech'),)
 
-    pos_name=models.CharField(max_length=30)
+    pos_name=models.CharField(max_length=30,help_text="This is the grey text")
     branch_appl=models.CharField(max_length=30,choices=DEPT)
                                        
     cpi_req=models.DecimalField(max_digits=4,decimal_places=2, default='0')
@@ -59,8 +61,8 @@ class JobPosition(models.Model):
     stipend=models.IntegerField(null=True)
     ctc=models.IntegerField(null=True)
     test_date=models.DateField(null=True)
-    cmp_name=models.ForeignKey(Company,on_delete=models.CASCADE,default='company')
-
+    cmp_name=models.ForeignKey(Company,on_delete=models.CASCADE,null=True)
+    job_desc=models.CharField(max_length=800,null=True)
     def __str__(self):
         return self.pos_name + '   ' + self.cmp_name
 

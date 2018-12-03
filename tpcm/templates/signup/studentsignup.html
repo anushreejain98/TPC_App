@@ -3,16 +3,25 @@
 {% block title %}Student login{% endblock %}
 
 {% block body %}
+<style>
+	table, th, td {
+		
+		border-collapse: collapse;
+		padding: 15px;
+	}
+</style>
     <div style="position:relative; bottom:100px">
         <center>
-                <h2>Student Signup</h2>
+                <h1><b>Student Signup</b></h1>
         </center>
     </div>
-    <div style="position:relative; left:380px; bottom:50px">
-            <div class="container">
-                <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p}}
+    <div style="position:relative;  bottom:50px">
+        <div class="container">
+            <form method="post">
+                    {% csrf_token %}
+                    <table >
+                        {{ form }}
+                    </table>
                         <div class="social-btns" style="position: absolute; right:750px; top:500px">
                                 <button type="submit">
                                     <a class="ln slogin"> <i class="fa">Signup</i></a>

@@ -6,14 +6,9 @@ from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.template import RequestContext
 from .models import Student, User, Company, JobPosition
-from .forms import StudentSignUpForm, CompanySignUpForm, CreatePositionForm
-from .models import Student, User, Company
-from .forms import EditStudentForm, EditCompanyForm
+from .forms import StudentSignUpForm, CompanySignUpForm, CreatePositionForm,EditStudentForm, EditCompanyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
-
-#class DetailView(generic.DetailView):
-#   template_name = 'home.html'
 
 def detail(request):
     template_name = 'home.html'
@@ -74,6 +69,22 @@ def company_update_profile(request):
     args['form'] = form
     return render(request, 'company/profile/company_update_profile.html', args)
 
+def create_job(request):
+    if request.method=='POST':
+        form=CreatePositionForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            template_name = 'company/job/job_created.html'
+            query = JobPosition.objects.all().values()
+            return render(request, template_name, context={
+                "query":query,
+                })              
+    else:
+        form=CreatePositionForm()
+    
+    return render(request,'company/job/createjob.html',{'form':form})
+
 class StudentSignUpView(CreateView):
     model = User
     form_class = StudentSignUpForm
@@ -103,34 +114,3 @@ class CompanySignUpView(CreateView):
         login(self.request, user)
         return redirect('/tpcm_app/')
 
-
-
-
-class CreatePositionView(CreateView):
-    model = JobPosition
-    form_class = CreatePositionForm
-    template_name = 'company/createjob.html'
-
-    def job_pos_view(request):
-        if request.method == 'POST':
-            form = CreatePositionForm(request.POST)
-            if form.is_valid():
-                pos_name = form.cleaned_data.get('pos_name')
-                branch_appl = form.cleaned_data.get('branch_appl')
-                cpi_req = form.cleaned_data.get('cpi_req')
-                course_appl = form.cleaned_data.get('course_appl')
-                stipend = form.cleaned_data.get('stipend')
-                ctc = form.cleaned_data.get('ctc')
-                test_date = form.cleaned_data.get('test_date')
-                cmp_name= request.user.company
-                # do something . your results
-                form.save()
-                return redirect('/tpcm_app/company')
-
-        else:
-            form = CreatePositionForm()
-
-        return render_to_response(template_name, {'form':form },
-            context_instance=RequestContext(request))
-
-    

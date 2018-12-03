@@ -3,6 +3,7 @@
 {% block title %}Create Job Position{% endblock %}
 
 {% block body %}
+
 <style>
         .button {
         background-color: #4CAF50; /* Green */
@@ -22,24 +23,21 @@
     background-color: white; 
     color: black; 
     border: 2px solid #008CBA;
-}
-        
-
+    }
+    table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 15px;
+	}
+  
         </style>
 <div style="position:relative; left:370px; bottom:50px">
         <div class="container">
             <form method="post">
                     {% csrf_token %}
-                    {{ form.as_p}}
-
-                    {% for value, text in form.branch_appl.field.choices %}
-                        <div class="ui slider checkbox">
-                            <input id="id_branch_appl_{{ forloop.counter0 }}" name="{{ form.branch_appl.name }}" 
-                            type="checkbox" value="{{ value }}"{% if value in checked_branch_appl %} checked="checked"{% endif %}>
-                            <label>{{ text }}</label>
-                        </div>
-                    {% endfor %}
-
+                    <table  >
+                    {{ form.as_table}}
+                    </table>
                     <button class="button button2" type="submit">Create Position</button>
 
             </form>

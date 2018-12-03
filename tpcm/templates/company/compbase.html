@@ -19,8 +19,20 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<!-- Custom styles for this template -->
         <link href="/static/style.css" rel="stylesheet">
-        <link href="/static/btns.css" rel="stylesheet">
-        
+		<link href="/static/btns.css" rel="stylesheet">
+		<!-- jquery for date -->
+		<link rel=”stylesheet” href=”//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css”>
+	<link rel=”stylesheet” href=”/resources/demos/style.css”>
+	<script src=”https://code.jquery.com/jquery-1.12.4.js”></script>
+	<script src=”https://code.jquery.com/ui/1.12.1/jquery-ui.js”></script>
+	<script>
+		<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	</script> 
+	<script>
+	$( function() {
+	$( “#id_test_date” ).datepicker();
+	} );
+	</script>  
 	</head>
 	<style>
 	img {
@@ -40,6 +52,8 @@
     left: 0; 
     width: 100%; 
     }
+	
+
 	</style>
 	
 	<body id="page-top">
