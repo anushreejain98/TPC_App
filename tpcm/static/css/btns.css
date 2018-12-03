@@ -52,18 +52,7 @@
   color: #dc4a38;
 }
 
-.social-btns .ln.cpos:before {
-  background-color: #dc4a38;
-  display: inline-block;
-  color: #dc4a38;
-  width: 350px;
-}
-.social-btns .ln.cpos .fa {
-  padding: 15px 32px;
-  display: inline-block;
-  color: #dc4a38;
-  width: 350px;
-}
+
 
 .social-btns .btn.dribbble:before {
   background-color: #f26798;

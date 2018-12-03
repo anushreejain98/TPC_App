@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 app_name='tpcm_app'
-
+from .models import Student, User, Company, JobPosition
 from . import views
-from .forms import StudentLoginForm, CompanyLoginForm
+from .forms import StudentLoginForm, CompanyLoginForm,CreatePositionForm
 urlpatterns = [
     
     #/tpcm_app/
@@ -26,5 +26,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('company/profile/update', views.company_update_profile, name='company_update'),
     path('company/profile', views.company_profile, name='company_profile'),
-    path('company/createjob',views.CreatePositionView.as_view(),name='cmp_createjob'),
+    path('company/createjob',views.create_job,name='cmp_createjob'),
 ]

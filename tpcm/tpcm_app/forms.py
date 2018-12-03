@@ -1,8 +1,7 @@
+from .models import Student, User, Company, JobPosition
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.db import transaction
-
-from .models import Student, User, Company, JobPosition
 import datetime
 
 class StudentSignUpForm(UserCreationForm):
@@ -34,9 +33,10 @@ class StudentSignUpForm(UserCreationForm):
         return user
 
 class CompanySignUpForm(UserCreationForm):
+    Category_choices=(('A1','A1'),('A2','A2'),('B1','B1'),)
     username = forms.CharField(label= "Company ID")
     name = forms.CharField(label= "Name of the company")
-    category = forms.CharField(label="Category")
+    category = forms.CharField(label="Category",widget=forms.Select(choices=Category_choices))
     hr_name = forms.CharField(label="Name of HR")
     hr_contact = forms.EmailField(label="HR Email")
     sector = forms.CharField(label="Sector")
@@ -88,20 +88,22 @@ class CreatePositionForm(forms.ModelForm):
             ('mtech','M. Tech'),]
             
     pos_name=forms.CharField(label="Job Position")
-    branch_appl=forms.CharField(widget=forms.Select(choices=DEPT))
-                                        
+    branch_appl=forms.CharField(widget=forms.Select(choices=DEPT))                                   
     cpi_req=forms.DecimalField(label="Min. CPI required")
     course_appl=forms.CharField(label="Select Course",
                                 widget=forms.Select(choices=COURSE))
     stipend=forms.IntegerField(label="Stipend")
     ctc=forms.IntegerField(label="CTC")
-    test_date=forms.DateField(label="Online Test Date")
-    
+    job_desc=forms.CharField(label="Job Description",widget=forms.Textarea)
+
     class Meta:
         model = JobPosition
         fields = ('pos_name', 'branch_appl', 'cpi_req', 'course_appl',
-                'stipend','ctc','test_date')
-
+                'stipend','ctc','test_date','job_desc')
+        widgets = {'test_date': forms.DateInput(format=('%m/%d/%Y'), 
+                    attrs={'class':'datepicker', 'placeholder':'Select a date', 'type':'date'}),
+                    }
+     
 
 class EditCompanyForm(UserChangeForm):
     password = None
