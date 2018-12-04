@@ -20,14 +20,18 @@
             <th>Student detail</th>
 		</tr>
 		{% for item in query %}
-            
+            {% if item.pos.cmp_name.name == username %}
                 <tr>
                     <td>{{forloop.counter}}</td>
-                    <td>{{item.pos.pos_name}}</td>
-                    <td>{{item.stud.name}}</td>
+					<td>{{item.pos.pos_name}}</td>
+					<td>
+						<a href = "/tpcm_app/company/application/stud_profile?id={{item.stud.user_id}}">
+							{{item.stud.name}}
+						</a>
+					</td>
                     
-                </tr>
-           
+				</tr>
+			{% endif %}
 		{% endfor %}
 	</table>
 </body>

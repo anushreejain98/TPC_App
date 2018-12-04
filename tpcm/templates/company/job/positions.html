@@ -19,20 +19,14 @@
 			<th>Online Test Date</th>
 		</tr>
 		{% for item in query %}
-<<<<<<< HEAD
-            
-                <tr>
-                    <td>{{item.pos_name}}</td>
-                    <td>{{item.test_date}}</td>
-                    
-                </tr>
-           
-=======
 			<tr>
-				<td>{{item.pos_name}}</td>
+				<td>
+					<a href="/tpcm_app/company/application?id={{item.id}}">
+						{{item.pos_name}}
+					</a>
+				</td>
 				<td>{{item.test_date}}</td>
 			</tr>
->>>>>>> ebb275429b7d46fb71332be0945c2b2550276a63
 		{% endfor %}
 	</table>
 </body>

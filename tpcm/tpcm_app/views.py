@@ -55,30 +55,33 @@ def company_profile(request):
 @login_required
 @company_required
 def positions(request):
-<<<<<<< HEAD
-    
-=======
->>>>>>> ebb275429b7d46fb71332be0945c2b2550276a63
     comp = request.user.company
     query = JobPosition.objects.all().select_related('cmp_name').filter(cmp_name=comp)
     return render(request, 'company/job/positions.html', context={
         "query":query,'username':request.user.company.name}
         )
 
-<<<<<<< HEAD
+@login_required
+@company_required
 def list_application(request):
-    comp = request.user.id
-    query = Application.objects.all().select_related('pos','stud').filter(pos_id=comp)    
+    pos=request.GET.get('id', '')
+    if pos == '':
+        query = Application.objects.all().select_related('pos').select_related('stud')
+    else:
+        query = Application.objects.all().select_related('pos').select_related('stud').filter(pos_id=pos)
     return render(request, 'company/job/applications.html', context={
         "query":query,'username':request.user.company.name}
         )
-    
 
+def stud_profile(request):
+    stud_id = request.GET.get('id')
+    query = User.objects.all().filter(student__user_id=stud_id)
+    return render(request, 'company/job/stud_profile.html', context={
+        "query":query,'username':request.user.company.name
+    })
 
-=======
 @login_required
 @student_required
->>>>>>> ebb275429b7d46fb71332be0945c2b2550276a63
 def student_update_profile(request):
     args={'username':request.user.student.name}
     stud = request.user.student
