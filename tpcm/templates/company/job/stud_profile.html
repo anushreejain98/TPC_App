@@ -1,0 +1,127 @@
+{% extends 'company/compbase.html' %}
+
+{% block body %}
+<style type="text/css">
+	#ProfilePage
+	{
+		/* Move it off the top of the page, then centre it horizontally */
+		margin: 50px auto;
+		width: 675px;
+	
+	/* For visibility. Delete me */
+	border: 1px solid black;
+	}
+	
+	#LeftCol
+	{
+		/* Move it to the left */
+		float: left;
+	
+		width: 200px;
+		text-align: center;
+	
+		/* Move it away from the content */
+		margin-right: 30px;
+		margin-left: 30px;
+		margin-top: 40px;
+	
+	/* For visibility. Delete me */
+	border: 1px solid brown;
+	}
+	
+	#Photo
+	{
+		/* Width and height of photo container */
+		width: 200px;
+		height: 200px;
+	
+	/* For visibility. Delete me */
+	
+	}
+	
+	#PhotoOptions
+	{
+		text-align: center;
+		width: 200px;
+	
+	/* For visibility. Delete me */
+	border: 1px solid black;
+	}
+	
+	#Info
+	{
+		width: 400px;
+		text-align: center;
+	
+		/* Move it to the right */
+		float: right;
+	
+	/* For visibility. Delete me */
+    border: 1px solid grey;
+    
+	}
+	
+	#Info strong
+	{
+		/* Give it a width */
+		display: inline-block;
+		width: 100px;
+	
+	/* For visibility. Delete me */
+	/*border: 1px solid orange; */
+	}
+	
+	#Info span
+	{
+		/* Give it a width */
+		display: inline-block;
+		width: 250px;
+	
+	/* For visibility. Delete me */
+    border: 1px solid grey;
+    background-color:white;
+	}
+	.space { margin-top: 400px; }
+
+	
+	</style>
+	<body id="page-top" >
+			
+		<div id="ProfilePage">
+			<div id="LeftCol">
+				<div id="Photo"><img src= '/static/default.png'></div>
+				<div id="ProfileOptions">
+				
+				</div>
+			</div>
+			<div id="Info">
+                {% for item in query %}
+				<br>
+				<p>
+					<strong>Name: </strong>
+					<span>{{item.student.name}}</span>
+				</p>
+				<br>
+				<p>
+					<strong>Roll no: </strong>
+					<span>{{item.username}}</span>
+				</p><br>
+				<p>
+					<strong>Department:&nbsp;&nbsp;</strong>
+					<span>{{item.student.dept}}</span>
+				</p><br>
+				<p>
+					<strong>Course: </strong>
+					<span>{{item.student.course}}</span>
+				</p><br>
+				<p>
+					<strong>CPI: </strong>
+					<span>{{item.student.cpi}}</span>
+                </p><br>
+                {% endfor %}
+			</div>
+			<!-- Needed because other elements inside ProfilePage have floats -->
+			<div style="clear:both"></div>
+        </div>
+	</body>
+{% endblock %}
