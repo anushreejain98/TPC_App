@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render, render_to_response
 from django.contrib.auth import login
 import os
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth import views as auth_views
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
@@ -9,6 +11,7 @@ from .models import Student, User, Company, JobPosition, Application
 from .forms import StudentSignUpForm, CompanySignUpForm, CreatePositionForm,EditStudentForm, EditCompanyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
+from .decorators import student_required, company_required
 import datetime
 
 def detail(request):
@@ -28,6 +31,7 @@ def detail(request):
             return render(request, template_name, context={"username":request.user.company.name})
 
     return render(request,template_name)
+
 def contact(request):
     return render(request, 'contact.html')
 def login_type(request):
@@ -36,14 +40,20 @@ def login_type(request):
 def signup_type(request):
     return render(request, 'signup/signuptype.html')
 
+@login_required
+@student_required
 def student_profile(request):
     args={'username':request.user.student.name}
     return render(request, 'student/profile/student_profile.html', args)
 
+@login_required
+@company_required
 def company_profile(request):
     args={'username':request.user.company.name}
     return render(request, 'company/profile/company_profile.html', args)
 
+@login_required
+@company_required
 def positions(request):
     comp = request.user.company
     query = JobPosition.objects.all().select_related('cmp_name').filter(cmp_name=comp)
@@ -51,7 +61,8 @@ def positions(request):
         "query":query,'username':request.user.company.name}
         )
 
-
+@login_required
+@student_required
 def student_update_profile(request):
     args={'username':request.user.student.name}
     stud = request.user.student
@@ -66,6 +77,8 @@ def student_update_profile(request):
     args['form'] = form
     return render(request, 'student/profile/student_update_profile.html', args)
 
+@login_required
+@company_required
 def company_update_profile(request):
     args={'username':request.user.company.name}
     comp = request.user.company
@@ -79,6 +92,8 @@ def company_update_profile(request):
     args['form'] = form
     return render(request, 'company/profile/company_update_profile.html', args)
 
+@login_required
+@company_required
 def create_job(request):
     ini={'cmp_name':request.user.company}
     if request.method=='POST':
@@ -101,6 +116,8 @@ def create_job(request):
         }
     )
 
+@login_required
+@student_required
 def desc_pos(request):
     pos_id = request.GET.get('id')
     query = JobPosition.objects.get(id=pos_id)
@@ -108,6 +125,8 @@ def desc_pos(request):
     return render(request, 'student/position/description.html', context={'query':query,
     'username':username})
 
+@login_required
+@student_required
 def apply_pos(request):
     pos_id = request.GET.get('id')
     job_pos = JobPosition.objects.get(id=pos_id)
@@ -116,9 +135,12 @@ def apply_pos(request):
     app.save()
     return redirect('/tpcm_app/student/position/apply/success')
 
+@login_required
+@student_required
 def apply_success(request):
     args={'username':request.user.student.name}
     return render(request, 'student/position/success.html', args)
+
 
 class StudentSignUpView(CreateView):
     model = User
