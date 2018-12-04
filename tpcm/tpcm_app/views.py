@@ -5,10 +5,11 @@ from django.contrib.auth import views as auth_views
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.template import RequestContext
-from .models import Student, User, Company, JobPosition
+from .models import Student, User, Company, JobPosition, Application
 from .forms import StudentSignUpForm, CompanySignUpForm, CreatePositionForm,EditStudentForm, EditCompanyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
+import datetime
 
 def detail(request):
     template_name = 'home.html'
@@ -91,6 +92,25 @@ def create_job(request):
             'username':request.user.company.name
         }
     )
+
+def desc_pos(request):
+    pos_id = request.GET.get('id')
+    query = JobPosition.objects.get(id=pos_id)
+    username = request.user.student.name
+    return render(request, 'student/position/description.html', context={'query':query,
+    'username':username})
+
+def apply_pos(request):
+    pos_id = request.GET.get('id')
+    job_pos = JobPosition.objects.get(id=pos_id)
+    stud = request.user.student
+    app = Application.objects.create(pos=job_pos, stud=stud, app_date=datetime.date.today())
+    app.save()
+    return redirect('/tpcm_app/student/position/apply/success')
+
+def apply_success(request):
+    args={'username':request.user.student.name}
+    return render(request, 'student/position/success.html', args)
 
 class StudentSignUpView(CreateView):
     model = User

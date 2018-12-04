@@ -1,0 +1,16 @@
+{% extends 'student/studbase.html' %}
+
+{% block body %}
+<head>
+    Position description:
+</head>
+<body>
+    {{query.job_desc}}
+    <div class="social-btns" style="position:relative;">
+            <div class="social-btns" style="position:relative;">
+        <a class="btn twitter" href="/tpcm_app/student/position/apply?id={{query.id}}" ><i class="fa">Apply</i></a>
+    </div>
+</body>
+{% endblock %}
+
+
