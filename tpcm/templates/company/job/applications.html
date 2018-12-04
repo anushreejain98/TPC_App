@@ -15,14 +15,16 @@
 
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
-			<th>Job Position</th>
-			<th>Online Test Date</th>
+			<th>Sr.no</th>
+            <th>Applied Position</th>
+            <th>Student detail</th>
 		</tr>
 		{% for item in query %}
             
                 <tr>
-                    <td>{{item.pos_name}}</td>
-                    <td>{{item.test_date}}</td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{item.pos.pos_name}}</td>
+                    <td>{{item.stud.name}}</td>
                     
                 </tr>
            

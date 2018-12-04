@@ -46,10 +46,19 @@ def company_profile(request):
 
 def positions(request):
     
-    query = JobPosition.objects.all().select_related('cmp_name')
+    comp = request.user.company
+    query = JobPosition.objects.all().select_related('cmp_name').filter(cmp_name=comp)
     return render(request, 'company/job/positions.html', context={
         "query":query,'username':request.user.company.name}
         )
+
+def list_application(request):
+    comp = request.user.id
+    query = Application.objects.all().select_related('pos','stud').filter(pos_id=comp)    
+    return render(request, 'company/job/applications.html', context={
+        "query":query,'username':request.user.company.name}
+        )
+    
 
 
 def student_update_profile(request):

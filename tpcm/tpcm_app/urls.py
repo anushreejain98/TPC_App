@@ -30,7 +30,8 @@ urlpatterns = [
     path('student/position/apply', views.apply_pos, name='apply_pos'),
     path('student/position/desc', views.desc_pos, name='desc_pos'),
     path('student/position/apply/success', views.apply_success, name='apply_success'),
-     path('company/positions',views.positions,name='positions'),
+    path('company/positions',views.positions,name='positions'),
+    path('company/application',views.list_application,name='list_application')
 
     
 ]
