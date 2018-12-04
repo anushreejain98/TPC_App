@@ -45,8 +45,8 @@ def company_profile(request):
     return render(request, 'company/profile/company_profile.html', args)
 
 def positions(request):
-    
-    query = JobPosition.objects.all().select_related('cmp_name')
+    comp = request.user.company
+    query = JobPosition.objects.all().select_related('cmp_name').filter(cmp_name=comp)
     return render(request, 'company/job/positions.html', context={
         "query":query,'username':request.user.company.name}
         )
