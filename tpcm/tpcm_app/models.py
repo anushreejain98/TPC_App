@@ -10,11 +10,13 @@ class User(AbstractUser):
     is_company = models.BooleanField(default=False)
 
 class Student(models.Model):
+    dept_choices = (('CS','CS'), ('EE','EE'), ('ME', 'ME'), ('CB', 'CB'), ('CE','CE'))
+    course_choices = (('B.Tech','B.Tech'), ('M.Tech','M.Tech'), ('M.Sc','M.Sc'))
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     name=models.CharField(max_length=30)
     cpi=models.DecimalField(max_digits=4,decimal_places=2, default='0')
-    dept=models.CharField(max_length=30,default='-')
-    course=models.CharField(max_length=30,default='-')
+    dept=models.CharField(max_length=30,default='-', choices=dept_choices)
+    course=models.CharField(max_length=30,default='-', choices=course_choices)
     resume=models.URLField()
     webmail = models.EmailField(max_length=100, unique=True)
     avatar = models.ImageField(upload_to='images/', default='images/default.png')
@@ -43,21 +45,14 @@ class JobPosition(models.Model):
     class Meta:
         unique_together=(('cmp_name','pos_name'),)
 
-    DEPT=(('1','Computer Science'),
-        ('2','Electrical'),
-        ('3','Mechanical'),
-        ('4','Civil Engg.'),
-        ('5','Chemical Engg.'),)
-
-    COURSE=(('btech','B. Tech'),
-            ('mtech','M. Tech'),)
+    dept_choices = (('CS','CS'), ('EE','EE'), ('ME', 'ME'), ('CB', 'CB'), ('CE','CE'))
+    course_choices = (('B.Tech','B.Tech'), ('M.Tech','M.Tech'), ('M.Sc','M.Sc'))
 
     pos_name=models.CharField(max_length=30,help_text="This is the grey text")
-    branch_appl=models.CharField(max_length=30,choices=DEPT)
+    branch_appl=models.CharField(max_length=30,choices=dept_choices)
                                        
     cpi_req=models.DecimalField(max_digits=4,decimal_places=2, default='0')
-    course_appl=models.CharField(max_length=30,choices=COURSE)
-                                
+    course_appl=models.CharField(max_length=30,choices=course_choices)                      
     stipend=models.IntegerField(null=True)
     ctc=models.IntegerField(null=True)
     test_date=models.DateField(null=True)
