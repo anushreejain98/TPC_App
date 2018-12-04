@@ -27,4 +27,7 @@ urlpatterns = [
     path('company/profile/update', views.company_update_profile, name='company_update'),
     path('company/profile', views.company_profile, name='company_profile'),
     path('company/createjob',views.create_job,name='cmp_createjob'),
+    path('student/position/apply', views.apply_pos, name='apply_pos'),
+    path('student/position/desc', views.desc_pos, name='desc_pos'),
+    path('student/position/apply/success', views.apply_success, name='apply_success'),
 ]

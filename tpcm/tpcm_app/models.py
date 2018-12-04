@@ -59,7 +59,16 @@ class JobPosition(models.Model):
     cmp_name=models.ForeignKey(Company,on_delete=models.CASCADE,null=True)
     job_desc=models.CharField(max_length=800,null=True)
     def __str__(self):
-        return self.pos_name + '   ' + self.cmp_name
+        return self.id
+
+class Application(models.Model):
+    app_date = models.DateField(null=True)
+    pos = models.ForeignKey(JobPosition, on_delete=models.CASCADE,null=True)
+    stud = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    def __str__(self):
+        return self.id
+    class Meta:
+         unique_together=(('pos','stud'),)
 
 
 

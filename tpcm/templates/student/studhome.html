@@ -16,7 +16,12 @@
 		{% for item in query %}
 		<tr> 
 			<td>{{forloop.counter}}</td>
-			<td>{{item.pos_name}}</td>
+			<td>
+				<a href="/tpcm_app/student/position/desc?id={{item.id}}">
+					{{item.pos_name}}
+				</a>
+				
+			</td>
 			<td>{{item.cmp_name.name}}</td>
 			<td>{{item.test_date}}</td>
 		</tr>
