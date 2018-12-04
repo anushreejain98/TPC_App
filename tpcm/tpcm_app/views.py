@@ -17,7 +17,7 @@ def detail(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             template_name = student_template
-            query = Company.objects.all().values()
+            query = JobPosition.objects.all().select_related('cmp_name')
             return render(request, template_name, context={
                 "username":request.user.student.name,
                 "query":query,
@@ -36,19 +36,21 @@ def signup_type(request):
     return render(request, 'signup/signuptype.html')
 
 def student_profile(request):
-    return render(request, 'student/profile/student_profile.html')
+    args={'username':request.user.student.name}
+    return render(request, 'student/profile/student_profile.html', args)
 
 def company_profile(request):
-    return render(request, 'company/profile/company_profile.html')
+    args={'username':request.user.company.name}
+    return render(request, 'company/profile/company_profile.html', args)
 
 def student_update_profile(request):
-    args={}
+    args={'username':request.user.student.name}
     stud = request.user.student
     if request.method == 'POST':
         form = EditStudentForm(request.POST, instance=stud)
         if form.is_valid():
             form.save()
-            return render(request, 'student/profile/profile_updated.html')
+            return render(request, 'student/profile/profile_updated.html', args)
     else:
         form = EditStudentForm(instance=stud)
 
@@ -56,34 +58,39 @@ def student_update_profile(request):
     return render(request, 'student/profile/student_update_profile.html', args)
 
 def company_update_profile(request):
-    args={}
+    args={'username':request.user.company.name}
     comp = request.user.company
     if request.method == 'POST':
         form = EditCompanyForm(request.POST, instance=comp)
         if form.is_valid():
             form.save()
-            return render(request, 'company/profile/profile_updated.html')
+            return render(request, 'company/profile/profile_updated.html', args)
     else:
         form = EditCompanyForm(instance=comp)
-
     args['form'] = form
     return render(request, 'company/profile/company_update_profile.html', args)
 
 def create_job(request):
+    ini={'cmp_name':request.user.company}
     if request.method=='POST':
-        form=CreatePositionForm(request.POST)
+        form=CreatePositionForm(request.POST, initial=ini)
 
         if form.is_valid():
             form.save()
             template_name = 'company/job/job_created.html'
             query = JobPosition.objects.all().values()
             return render(request, template_name, context={
-                "query":query,
+                "query":query, 'username':request.user.company.name
                 })              
     else:
-        form=CreatePositionForm()
+        form=CreatePositionForm(initial=ini)
     
-    return render(request,'company/job/createjob.html',{'form':form})
+    return render(request,'company/job/createjob.html',
+        {
+            'form':form, 
+            'username':request.user.company.name
+        }
+    )
 
 class StudentSignUpView(CreateView):
     model = User
