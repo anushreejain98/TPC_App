@@ -44,6 +44,14 @@ def company_profile(request):
     args={'username':request.user.company.name}
     return render(request, 'company/profile/company_profile.html', args)
 
+def positions(request):
+    
+    query = JobPosition.objects.all().select_related('cmp_name')
+    return render(request, 'company/job/positions.html', context={
+        "query":query,'username':request.user.company.name}
+        )
+
+
 def student_update_profile(request):
     args={'username':request.user.student.name}
     stud = request.user.student
