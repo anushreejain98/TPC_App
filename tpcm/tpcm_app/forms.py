@@ -5,11 +5,13 @@ from django.db import transaction
 import datetime
 
 class StudentSignUpForm(UserCreationForm):
+    dept_choices = (('CS','CS'), ('EE','EE'), ('ME', 'ME'), ('CB', 'CB'), ('CE','CE'))
+    course_choices = (('B.Tech','B.Tech'), ('M.Tech','M.Tech'), ('M.Sc','M.Sc'))
     username = forms.CharField(label= "Roll Number")
     name = forms.CharField(label= "Full Name")
     cpi = forms.DecimalField(label="Current CPI")
-    dept = forms.CharField(label="Department")
-    course = forms.CharField(label="Course of study")
+    dept = forms.CharField(label="Department", widget=forms.Select(choices=dept_choices))
+    course = forms.CharField(label="Course of study", widget=forms.Select(choices=course_choices))
     resume = forms.URLField(label="URL to resume")
     webmail = forms.EmailField(label="Webmail ID")
     class Meta(UserCreationForm.Meta):
@@ -78,20 +80,13 @@ class EditStudentForm(UserChangeForm):
 
 
 class CreatePositionForm(forms.ModelForm):
-    DEPT=[('1','Computer Science'),
-        ('2','Electrical'),
-        ('3','Mechanical'),
-        ('4','Civil Engg.'),
-        ('5','Chemical Engg.'),]
-
-    COURSE=[('btech','B. Tech'),
-            ('mtech','M. Tech'),]
-            
+    dept_choices = (('CS','CS'), ('EE','EE'), ('ME', 'ME'), ('CB', 'CB'), ('CE','CE'))
+    course_choices = (('B.Tech','B.Tech'), ('M.Tech','M.Tech'), ('M.Sc','M.Sc'))     
     pos_name=forms.CharField(label="Job Position")
-    branch_appl=forms.CharField(widget=forms.Select(choices=DEPT))                                   
+    branch_appl=forms.CharField(widget=forms.Select(choices=dept_choices))                                   
     cpi_req=forms.DecimalField(label="Min. CPI required")
     course_appl=forms.CharField(label="Select Course",
-                                widget=forms.Select(choices=COURSE))
+                                widget=forms.Select(choices=course_choices))
     stipend=forms.IntegerField(label="Stipend")
     ctc=forms.IntegerField(label="CTC")
     job_desc=forms.CharField(label="Job Description",widget=forms.Textarea)
@@ -99,9 +94,10 @@ class CreatePositionForm(forms.ModelForm):
     class Meta:
         model = JobPosition
         fields = ('pos_name', 'branch_appl', 'cpi_req', 'course_appl',
-                'stipend','ctc','test_date','job_desc')
-        widgets = {'test_date': forms.DateInput(format=('%m/%d/%Y'), 
+                'stipend','ctc','test_date','job_desc', 'cmp_name')
+        widgets = {'test_date': forms.DateInput(format=('%m/%d/%Y'),
                     attrs={'class':'datepicker', 'placeholder':'Select a date', 'type':'date'}),
+                    'cmp_name': forms.HiddenInput
                     }
      
 
