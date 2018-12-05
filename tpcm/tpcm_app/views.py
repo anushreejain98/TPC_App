@@ -65,10 +65,10 @@ def positions(request):
 @company_required
 def list_application(request):
     pos=request.GET.get('id', '')
-    if pos == '':
-        query = Application.objects.all().select_related('pos').select_related('stud')
-    else:
-        query = Application.objects.all().select_related('pos').select_related('stud').filter(pos_id=pos)
+    query = Application.objects.all().select_related('pos').select_related('stud').filter(pos__cmp_name=request.user.company)
+    if pos != '':
+        query = query.filter(pos_id=pos)
+
     return render(request, 'company/job/applications.html', context={
         "query":query,'username':request.user.company.name}
         )

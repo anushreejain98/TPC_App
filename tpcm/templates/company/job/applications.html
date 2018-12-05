@@ -34,7 +34,6 @@
 			<th>Close application</th>
 		</tr>
 		{% for item in query %}
-            {% if item.pos.cmp_name.name == username %}
                 <tr>
                     <td>{{forloop.counter}}</td>
 					<td>{{item.pos.pos_name}}</td>
@@ -51,7 +50,6 @@
 					</td>
                     
 				</tr>
-			{% endif %}
 		{% endfor %}
 	</table>
 </body>
