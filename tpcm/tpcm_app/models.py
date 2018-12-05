@@ -65,6 +65,7 @@ class Application(models.Model):
     app_date = models.DateField(null=True)
     pos = models.ForeignKey(JobPosition, on_delete=models.CASCADE,null=True)
     stud = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    stat = models.IntegerField(default=0)
     def __str__(self):
         return self.id
     class Meta:

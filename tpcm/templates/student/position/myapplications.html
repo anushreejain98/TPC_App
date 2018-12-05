@@ -16,7 +16,8 @@
 			<th>Sr.no</th>
             <th>Position</th>
             <th>Company</th>
-            <th>Date of online test</th>
+			<th>Date of online test</th>
+			<th>Application Status</th>
 		</tr>
 		{% for item in query %}
             <tr>
@@ -25,8 +26,22 @@
                 <td>
                     {{item.pos.cmp_name.name}}
                 </td>
-                <td>{{item.pos.test_date}}</td>
-                
+				<td>{{item.pos.test_date}}</td>
+				<td>
+				{% if item.stat == 0 %}
+					<div>
+						Pending
+					</div>
+					{% elif item.stat == 1%}
+					<div>
+						Accepted
+					</div>
+					{% else %}
+					<div>
+						Rejected
+					</div>
+				{% endif %}
+				</td>
             </tr>
 		{% endfor %}
 	</table>

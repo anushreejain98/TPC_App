@@ -198,6 +198,15 @@ def close_application(request):
 
 @login_required
 @company_required
+def application_status(request):
+    stat = request.GET.get('stat')
+    app_id = request.GET.get('id')
+    app = Application.objects.filter(id=app_id)
+    app.update(stat=stat)
+    return redirect('/tpcm_app/company/application')
+
+@login_required
+@company_required
 def close_positions(request):
     pos_id = request.GET.get('id')
     JobPosition.objects.filter(id=pos_id).delete()
