@@ -117,7 +117,13 @@
 				<p>
 					<strong>CPI: </strong>
 					<span>{{item.student.cpi}}</span>
-                </p><br>
+				</p><br>
+				<p>
+					<strong>Resume Link: </strong>
+					<span>
+						<input type="button" value="Click Here" onclick="window.location='{{item.student.resume}}'"/>
+					</span>
+				</p><br>
                 {% endfor %}
 			</div>
 			<!-- Needed because other elements inside ProfilePage have floats -->
