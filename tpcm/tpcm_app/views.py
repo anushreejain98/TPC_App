@@ -21,7 +21,7 @@ def detail(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             template_name = student_template
-            query = JobPosition.objects.all().select_related('cmp_name')
+            query = JobPosition.objects.all().select_related('cmp_name').order_by('test_date')
             return render(request, template_name, context={
                 "username":request.user.student.name,
                 "query":query,
@@ -57,6 +57,7 @@ def company_profile(request):
 def positions(request):
     comp = request.user.company
     query = JobPosition.objects.all().select_related('cmp_name').filter(cmp_name=comp)
+    query = query.order_by('test_date')
     return render(request, 'company/job/positions.html', context={
         "query":query,'username':request.user.company.name}
         )
@@ -66,6 +67,7 @@ def positions(request):
 def list_application(request):
     pos=request.GET.get('id', '')
     query = Application.objects.all().select_related('pos').select_related('stud').filter(pos__cmp_name=request.user.company)
+    query = query.order_by('app_date')
     if pos != '':
         query = query.filter(pos_id=pos)
 
@@ -96,7 +98,7 @@ def stud_profile(request):
 @student_required
 def student_view_applications(request):
     stud=request.user.student
-    query = Application.objects.all().select_related('pos').select_related('stud').filter(stud=stud)
+    query = Application.objects.all().select_related('pos').select_related('stud').filter(stud=stud).order_by('pos__test_date')
     return render(request, 'student/position/myapplications.html', context={
         "query":query,'username':request.user.student.name
     })
