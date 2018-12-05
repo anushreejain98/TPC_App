@@ -10,17 +10,30 @@
 		padding: 15px;
 	}
 </style>
+<script type='text/javascript'>
 
+	function confirmation(x){
+
+	var user_choice = window.confirm('Are you sure you want to close?');
+
+	if(user_choice==true) {
+	window.location='/tpcm_app/company/application/close?id=' + x;
+	} else {
+	return false;
+	}
+}
+</script>
 <body id="page-top">
 
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
 			<th>Sr.no</th>
             <th>Applied Position</th>
-            <th>Student detail</th>
+			<th>Student detail</th>
+			<th>Date of application</th>
+			<th>Close application</th>
 		</tr>
 		{% for item in query %}
-            {% if item.pos.cmp_name.name == username %}
                 <tr>
                     <td>{{forloop.counter}}</td>
 					<td>{{item.pos.pos_name}}</td>
@@ -29,9 +42,14 @@
 							{{item.stud.name}}
 						</a>
 					</td>
+					<td>{{item.app_date}}</td>
+					<td>
+						<center>
+						<input type="button" value="Close" onclick="confirmation({{item.id}})" />
+					</center>
+					</td>
                     
 				</tr>
-			{% endif %}
 		{% endfor %}
 	</table>
 </body>

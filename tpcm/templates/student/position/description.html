@@ -2,10 +2,30 @@
 
 {% block body %}
 <head>
-    Position description:
+    
 </head>
 <body>
-    {{query.job_desc}}
+    <head>
+        {{query.pos_name}}
+    </head>
+    <div>
+        Company: {{query.cmp_name.name}}
+    </div>
+    <div>
+        Position description: {{query.job_desc}}
+    </div>
+    <div>
+        Branch Applicable: {{query.branch_appl}}
+    </div>
+    <div>
+        Minimum CPI requirement: {{query.cpi_req}}
+    </div>
+    <div>
+        Salary: {{query.stipend}} lakhs
+    </div>
+    <div>
+        CTC: {{query.ctc}} lakhs
+    </div>
     <div class="social-btns" style="position:relative;">
             <div class="social-btns" style="position:relative;">
         <a class="btn twitter" href="/tpcm_app/student/position/apply?id={{query.id}}" ><i class="fa">Apply</i></a>

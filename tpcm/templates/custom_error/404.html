@@ -23,11 +23,13 @@
         
 	</head>
 	<style>
-	img{
+	img {
+		opacity: 0.25;
 		filter: alpha(opacity=44); /* For IE8 and earlier */
 		display: block;
 		margin-left: auto;
         margin-right: auto;
+        height: 450px;
 	}
 	h2{
 		font-weight:270;
@@ -39,39 +41,10 @@
     width: 100%; 
     }
 	</style>
-	
-	<body id="page-top">
-		<!-- Navigation -->
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a class="page-scroll" href="/tpcm_app/">Home</a>
-						</li>
-						<li>
-								<a class="page-scroll" href="/tpcm_app/student/myapplications">My Applications</a>
-						</li>
-                        <li>
-                                <a class="page-scroll" href="/tpcm_app/student/profile">{{username}}</a>
-                        </li>
-                        <li>
-                                <a class="page-scroll" href="/tpcm_app/signout">Sign out</a>
-						</li>
-					</ul>
-                </div >
-                <!-- /.navbar-collapse -->
-		</nav>
-	</body>
 	<div>
-		<a ><img src="/static/logo.png" class="center" style="opacity:0.25; height: 450px;" ></a>
+		<a ><img src="/static/logo.png" class="center" ></a>
 		<h3>
-				{% block body %}
-				{% endblock %}
+		Sorry, we couldn't find the page you requested.
 		</h3>
-		
 	</div>
-	
 </html>

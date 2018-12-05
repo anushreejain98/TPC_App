@@ -10,22 +10,44 @@
 		padding: 15px;
 	}
 </style>
+<script type='text/javascript'>
 
+	function confirmation(x){
+
+	var user_choice = window.confirm('Are you sure you want to close?');
+
+	if(user_choice==true) {
+	window.location='/tpcm_app/company/positions/close?id=' + x;
+	} else {
+	return false;
+	}
+}
+</script>
 <body id="page-top">
 
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
 			<th>Job Position</th>
 			<th>Online Test Date</th>
+			<th>View applications</th>
+			<th>Close Position</th>
 		</tr>
 		{% for item in query %}
 			<tr>
 				<td>
-					<a href="/tpcm_app/company/application?id={{item.id}}">
-						{{item.pos_name}}
-					</a>
+					{{item.pos_name}}
 				</td>
 				<td>{{item.test_date}}</td>
+				<td>
+					<center>
+						<input type="button" value="View" onclick="window.location='/tpcm_app/company/application?id={{item.id}}'" />
+					</center>
+				</td>
+				<td>
+					<center>
+					<input type="button" value="Close" onclick="confirmation({{item.id}})" />
+					</center>
+				</td>
 			</tr>
 		{% endfor %}
 	</table>
