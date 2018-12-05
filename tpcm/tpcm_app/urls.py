@@ -30,9 +30,10 @@ urlpatterns = [
     path('student/position/apply', views.apply_pos, name='apply_pos'),
     path('student/position/desc', views.desc_pos, name='desc_pos'),
     path('student/position/apply/success', views.apply_success, name='apply_success'),
+    path('student/myapplications', views.student_view_applications, name='student_applications'),
     path('company/positions',views.positions,name='positions'),
+    path('company/positions/close',views.close_positions,name='close_positions'),
     path('company/application',views.list_application,name='list_application'),
-    path('company/application/stud_profile', views.stud_profile, name='stud_profile')
-
-    
+    path('company/application/close',views.close_application,name='close_application'),
+    path('company/application/stud_profile', views.stud_profile, name='stud_profile') 
 ]

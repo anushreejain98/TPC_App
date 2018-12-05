@@ -1,0 +1,34 @@
+{% extends 'student/studbase.html' %}
+
+{% block body %}
+<style>
+	table,
+	th,
+	td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 15px;
+	}
+</style>
+<body id="page-top">
+	<table style="position: relative; margin-left: auto; margin-right:auto;">
+		<tr>
+			<th>Sr.no</th>
+            <th>Position</th>
+            <th>Company</th>
+            <th>Date of online test</th>
+		</tr>
+		{% for item in query %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{item.pos.pos_name}}</td>
+                <td>
+                    {{item.pos.cmp_name.name}}
+                </td>
+                <td>{{item.pos.test_date}}</td>
+                
+            </tr>
+		{% endfor %}
+	</table>
+</body>
+{% endblock %}

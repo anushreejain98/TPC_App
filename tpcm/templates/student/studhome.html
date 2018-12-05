@@ -14,18 +14,21 @@
 			<th>Position Name</th>
 			<th>Company Name</th>
 			<th>Date of Online test</th>
+			<th>Create Application</th>
 		</tr>
 		{% for item in query %}
 		<tr> 
 			<td>{{forloop.counter}}</td>
 			<td>
-				<a href="/tpcm_app/student/position/desc?id={{item.id}}">
 					{{item.pos_name}}
-				</a>
-				
 			</td>
 			<td>{{item.cmp_name.name}}</td>
 			<td>{{item.test_date}}</td>
+			<td>
+				<center>
+				<input type="button" value="Apply" onclick="window.location='/tpcm_app/student/position/desc?id={{item.id}}'"/>
+				</center>
+			</td>
 		</tr>
 		{% endfor %}
 </table>

@@ -10,14 +10,27 @@
 		padding: 15px;
 	}
 </style>
+<script type='text/javascript'>
 
+	function confirmation(x){
+
+	var user_choice = window.confirm('Are you sure you want to close?');
+
+	if(user_choice==true) {
+	window.location='/tpcm_app/company/application/close?id=' + x;
+	} else {
+	return false;
+	}
+}
+</script>
 <body id="page-top">
 
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
 			<th>Sr.no</th>
             <th>Applied Position</th>
-            <th>Student detail</th>
+			<th>Student detail</th>
+			<th>Close Application</th>
 		</tr>
 		{% for item in query %}
             {% if item.pos.cmp_name.name == username %}
@@ -28,6 +41,11 @@
 						<a href = "/tpcm_app/company/application/stud_profile?id={{item.stud.user_id}}">
 							{{item.stud.name}}
 						</a>
+					</td>
+					<td>
+						<center>
+						<input type="button" value="Close" onclick="confirmation({{item.id}})" />
+					</center>
 					</td>
                     
 				</tr>
