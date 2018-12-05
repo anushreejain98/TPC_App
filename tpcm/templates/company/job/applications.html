@@ -10,14 +10,31 @@
 		padding: 15px;
 	}
 </style>
-<script type='text/javascript'>
-
+<script type='text/javascript'></script>
+<script>
 	function confirmation(x){
 
 	var user_choice = window.confirm('Are you sure you want to close?');
 
 	if(user_choice==true) {
-	window.location='/tpcm_app/company/application/close?id=' + x;
+	return window.location='/tpcm_app/company/application/close?id=' + x;
+	} else {
+	return false;
+	}
+}
+</script>
+<script>
+	function stat(x, y){
+	if(y == 1)
+	var user_choice = window.confirm('Are you sure you want to accept?');
+	else 
+	var user_choice = window.confirm('Are you sure you want to reject?');
+	if(user_choice==true) {
+	var str = '/tpcm_app/company/application/status?id=';
+	str += x;
+	str += ';stat=';
+	str += y;
+	return window.location= str;
 	} else {
 	return false;
 	}
@@ -32,6 +49,7 @@
 			<th>Student detail</th>
 			<th>Date of application</th>
 			<th>Close application</th>
+			<th>Application status</th>
 		</tr>
 		{% for item in query %}
                 <tr>
@@ -50,7 +68,21 @@
 					<td>
 						<center>
 						<input type="button" value="Close" onclick="confirmation({{item.id}})" />
-					</center>
+						</center>
+					</td>
+					<td>
+						{% if item.stat == 0 %}
+						<input type="button" value="Accept" onclick="stat({{item.id}}, 1)" />
+						<input type="button" value="Reject" onclick="stat({{item.id}}, 2)" />
+						{% elif item.stat == 1%}
+						<div>
+							Accepted
+						</div>
+						{% else %}
+						<div>
+							Rejected
+						</div>
+						{% endif %}
 					</td>
                     
 				</tr>

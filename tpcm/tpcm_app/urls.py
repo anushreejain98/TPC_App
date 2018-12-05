@@ -34,6 +34,7 @@ urlpatterns = [
     path('company/positions',views.positions,name='positions'),
     path('company/positions/close',views.close_positions,name='close_positions'),
     path('company/application',views.list_application,name='list_application'),
+    path('company/application/status',views.application_status,name='application_status'),
     path('company/application/close',views.close_application,name='close_application'),
     path('company/application/stud_profile', views.stud_profile, name='stud_profile'),
     path('company/application/desc',views.show_position,name='views.show_position'),
