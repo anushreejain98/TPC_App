@@ -30,7 +30,8 @@
 			<th>Sr.no</th>
             <th>Applied Position</th>
 			<th>Student detail</th>
-			<th>Close Application</th>
+			<th>Date of application</th>
+			<th>Close application</th>
 		</tr>
 		{% for item in query %}
             {% if item.pos.cmp_name.name == username %}
@@ -42,6 +43,7 @@
 							{{item.stud.name}}
 						</a>
 					</td>
+					<td>{{item.app_date}}</td>
 					<td>
 						<center>
 						<input type="button" value="Close" onclick="confirmation({{item.id}})" />
