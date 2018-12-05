@@ -23,11 +23,16 @@
         
 	</head>
 	<style>
+			body {
+		
+		background-color: #a1c4fd; /* For browsers that do not support gradients */
+  		background-image: linear-gradient(to right, #7397d1 , #cfeefc); /* Standard syntax (must be last) */
+	}
 	img{
-		filter: alpha(opacity=44); /* For IE8 and earlier */
+		opacity: 0.85;
+		filter: alpha(opacity=85); /* For IE8 and earlier */
 		display: block;
-		margin-left: auto;
-        margin-right: auto;
+		height: 150px;
 	}
 	h2{
 		font-weight:270;
@@ -42,8 +47,8 @@
 	
 	<body id="page-top">
 		<!-- Navigation -->
-		<nav class="navbar navbar-default">
-			<div class="container">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -66,7 +71,7 @@
 		</nav>
 	</body>
 	<div>
-		<a ><img src="/static/logo.png" class="center" style="opacity:0.25; height: 450px;" ></a>
+		<a ><img src="/static/logo.png" class="center" style="opacity:0.85; height: 150px;" ></a>
 		<h3>
 				{% block body %}
 				{% endblock %}

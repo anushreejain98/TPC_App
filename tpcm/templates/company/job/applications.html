@@ -36,7 +36,11 @@
 		{% for item in query %}
                 <tr>
                     <td>{{forloop.counter}}</td>
-					<td>{{item.pos.pos_name}}</td>
+					<td>
+						<a href="/tpcm_app/company/application/desc?id={{item.pos_id}}">
+						{{item.pos.pos_name}}
+						</a>
+					</td>
 					<td>
 						<a href = "/tpcm_app/company/application/stud_profile?id={{item.stud.user_id}}">
 							{{item.stud.name}}

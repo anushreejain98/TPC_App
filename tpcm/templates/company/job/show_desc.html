@@ -1,0 +1,47 @@
+{% extends 'company/compbase.html' %}
+
+{% block body %}
+
+    <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 15px;
+            }
+    </style>
+    
+    <body id="page-top">
+        <h1>
+            <center>
+            {{query.pos_name}}
+            </center>
+        </h1>
+
+        <table style="position: relative; margin-left: auto; margin-right:auto;">
+            <tr>
+                <td> Position description:</td>
+                <td> {{query.job_desc}}</td>
+            </tr>
+            <tr>
+                <td>Branch Applicable: </td>
+                <td>{{query.branch_appl}}</td>    
+            </tr>
+            <tr>
+                    <td> Minimum CPI requirement: </td>
+                    <td>{{query.cpi_req}}</td> 
+            </tr>
+            <tr>
+                    <td>Salary:</td>
+                    <td>{{query.stipend}} per month</td> 
+            </tr>
+            <tr>
+                    <td>CTC:</td>
+                    <td>{{query.ctc}} per annum</td> 
+            </tr>
+        </table>
+    </body>
+{% endblock %}
+
+

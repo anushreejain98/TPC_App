@@ -75,6 +75,16 @@ def list_application(request):
 
 @login_required
 @company_required
+def show_position(request):
+    pos=request.GET.get('id','')
+    query = JobPosition.objects.get(id=pos)
+    return render(request, 'company/job/show_desc.html', context={
+        "query":query,'username':request.user.company.name}
+        )
+
+
+@login_required
+@company_required
 def stud_profile(request):
     stud_id = request.GET.get('id')
     query = User.objects.all().filter(student__user_id=stud_id)

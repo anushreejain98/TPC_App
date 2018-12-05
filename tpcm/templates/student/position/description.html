@@ -1,31 +1,45 @@
 {% extends 'student/studbase.html' %}
 
 {% block body %}
-<head>
-    
-</head>
-<body>
-    <head>
+<style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px;
+        }
+</style>
+
+<body id="page-top">
+    <h1>
+        <center>
         {{query.pos_name}}
-    </head>
-    <div>
-        Company: {{query.cmp_name.name}}
-    </div>
-    <div>
-        Position description: {{query.job_desc}}
-    </div>
-    <div>
-        Branch Applicable: {{query.branch_appl}}
-    </div>
-    <div>
-        Minimum CPI requirement: {{query.cpi_req}}
-    </div>
-    <div>
-        Salary: {{query.stipend}} lakhs
-    </div>
-    <div>
-        CTC: {{query.ctc}} lakhs
-    </div>
+        </center>
+    </h1>
+
+    <table style="position: relative; margin-left: auto; margin-right:auto;">
+        <tr>
+            <td> Position description:</td>
+            <td> {{query.job_desc}}</td>
+        </tr>
+        <tr>
+            <td>Branch Applicable: </td>
+            <td>{{query.branch_appl}}</td>    
+        </tr>
+        <tr>
+                <td> Minimum CPI requirement: </td>
+                <td>{{query.cpi_req}}</td> 
+        </tr>
+        <tr>
+                <td>Salary:</td>
+                <td>{{query.stipend}} per month</td> 
+        </tr>
+        <tr>
+                <td>CTC:</td>
+                <td>{{query.ctc}} per annum</td> 
+        </tr>
+    </table>
     <div class="social-btns" style="position:relative;">
             <div class="social-btns" style="position:relative;">
         <a class="btn twitter" href="/tpcm_app/student/position/apply?id={{query.id}}" ><i class="fa">Apply</i></a>

@@ -27,6 +27,7 @@
 
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
+			<th>Sr.no</th>
 			<th>Job Position</th>
 			<th>Online Test Date</th>
 			<th>View applications</th>
@@ -34,8 +35,12 @@
 		</tr>
 		{% for item in query %}
 			<tr>
+				<td>{{forloop.counter}}</td>
 				<td>
-					{{item.pos_name}}
+					
+					<a href="/tpcm_app/company/application/desc?id={{item.id}}">
+						{{item.pos_name}}
+					</a>
 				</td>
 				<td>{{item.test_date}}</td>
 				<td>
