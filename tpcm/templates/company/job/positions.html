@@ -9,6 +9,24 @@
 		border-collapse: collapse;
 		padding: 15px;
 	}
+	i {
+	  display: inline-block;
+	  padding: 3px;
+	}
+	
+	.up {
+		border: solid green;
+		border-width: 0 3px 3px 0;
+		transform: rotate(-135deg);
+		-webkit-transform: rotate(-135deg);
+	}
+	
+	.down {
+		border: solid red;
+		border-width: 0 3px 3px 0;
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+	}
 </style>
 <script type='text/javascript'>
 
@@ -29,8 +47,14 @@
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
 			<th>Sr.no</th>
-			<th>Job Position</th>
-			<th>Online Test Date</th>
+			<th>Job Position
+					<a href="/tpcm_app/company/positions?sort=1"><i class="up"></i></a>
+					<a href="/tpcm_app/company/positions?sort=-1"><i class="down"></i></a>
+			</th>
+			<th>Online Test Date
+					<a href="/tpcm_app/company/positions?sort=2"><i class="up"></i></a>
+					<a href="/tpcm_app/company/positions?sort=-2"><i class="down"></i></a>
+			</th>
 			<th>View applications</th>
 			<th>Close Position</th>
 		</tr>

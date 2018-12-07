@@ -40,17 +40,57 @@
 	}
 }
 </script>
+<style>
+	i {
+	  display: inline-block;
+	  padding: 3px;
+	}
+	
+	.up {
+		border: solid green;
+		border-width: 0 3px 3px 0;
+		transform: rotate(-135deg);
+		-webkit-transform: rotate(-135deg);
+	}
+	
+	.down {
+		border: solid red;
+		border-width: 0 3px 3px 0;
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+	}
+</style>
 <body id="page-top">
 		<h1><b><center>Applications</center></b></h1>
 		<br><br>
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
-			<th>Sr.no</th>
-            <th>Applied Position</th>
-			<th>Student detail</th>
-			<th>Date of application</th>
+			<th>S.no</th>
+			<th>Applied Position
+				<a href="/tpcm_app/company/application?sort=1{{id}}"><i class="up"></i></a>
+				<a href="/tpcm_app/company/application?sort=-1{{id}}"><i class="down"></i></a>
+			</th>
+			<th>Student
+					<a href="/tpcm_app/company/application?sort=2{{id}}"><i class="up"></i></a>
+					<a href="/tpcm_app/company/application?sort=-2{{id}}"><i class="down"></i></a>
+			</th>
+			<th>CPI
+					<a href="/tpcm_app/company/application?sort=3{{id}}"><i class="up"></i></a>
+					<a href="/tpcm_app/company/application?sort=-3{{id}}"><i class="down"></i></a>
+			</th>
+			<th>Branch
+					<a href="/tpcm_app/company/application?sort=4{{id}}"><i class="up"></i></a>
+					<a href="/tpcm_app/company/application?sort=-4{{id}}"><i class="down"></i></a>
+			</th>
+			<th>Date of application
+					<a href="/tpcm_app/company/application?sort=5{{id}}"><i class="up"></i></a>
+					<a href="/tpcm_app/company/application?sort=-5{{id}}"><i class="down"></i></a>
+			</th>
 			<th>Close application</th>
-			<th>Application status</th>
+			<th>Application status
+					<a href="/tpcm_app/company/application?sort=6{{id}}"><i class="up"></i></a>
+					<a href="/tpcm_app/company/application?sort=-6{{id}}"><i class="down"></i></a>
+			</th>
 		</tr>
 		{% for item in query %}
                 <tr>
@@ -65,6 +105,8 @@
 							{{item.stud.name}}
 						</a>
 					</td>
+					<td>{{item.stud.cpi}}</td>
+					<td>{{item.stud.dept}}</td>
 					<td>{{item.app_date}}</td>
 					<td>
 						<center>

@@ -20,11 +20,34 @@ def detail(request):
     company_template = 'company/comphome.html'
     if request.user.is_authenticated:
         if request.user.is_student:
+            s = request.GET.get('sort', '0')
+            stud = request.user.student
+            sort = int(s)
+            para = ''
+            if sort < 0:
+                para = '-'
+                sort *= -1
+
+            if sort == 1:
+                para += 'pos_name'
+            elif sort == 2:
+                para += 'cmp_name__name'
+            elif sort == 3:
+                para += 'test_date'
+
             template_name = student_template
-            query = JobPosition.objects.all().select_related('cmp_name').order_by('test_date')
+            query = JobPosition.objects.all().select_related('cmp_name')
+            myapp = Application.objects.all().select_related('pos').select_related('stud').filter(stud=stud)
+            app_list = []
+            for item in query:
+                if myapp.filter(pos__id=item.id).count() == 0:
+                    app_list.append(item.id)
+            if para != '':
+                query = query.order_by(para)
             return render(request, template_name, context={
                 "username":request.user.student.name,
                 "query":query,
+                "app":app_list
                 })
         else:
             template_name = company_template
@@ -56,8 +79,21 @@ def company_profile(request):
 @company_required
 def positions(request):
     comp = request.user.company
+    s = request.GET.get('sort', '0')
+    sort = int(s)
+    para = ''
+    if sort < 0:
+        para = '-'
+        sort *= -1
+
+    if sort == 1:
+        para += 'pos_name'
+    elif sort == 2:
+        para += 'test_date'
+    
     query = JobPosition.objects.all().select_related('cmp_name').filter(cmp_name=comp)
-    query = query.order_by('test_date')
+    if para != '':
+        query = query.order_by(para)
     return render(request, 'company/job/positions.html', context={
         "query":query,'username':request.user.company.name}
         )
@@ -66,13 +102,32 @@ def positions(request):
 @company_required
 def list_application(request):
     pos=request.GET.get('id', '')
+    s =request.GET.get('sort', '0')
     query = Application.objects.all().select_related('pos').select_related('stud').filter(pos__cmp_name=request.user.company)
-    query = query.order_by('app_date')
     if pos != '':
         query = query.filter(pos_id=pos)
-
+    pos = ';id=' + pos
+    para = ''
+    sort = int(s)
+    if sort < 0:
+        sort *= -1
+        para += '-'
+    if sort == 1:
+        para += 'pos__pos_name'
+    elif sort == 2:
+        para += 'stud__name'
+    elif sort == 3:
+        para += 'stud__cpi'
+    elif sort == 4:
+        para += 'stud__dept'
+    elif sort == 5:
+        para += 'app_date'
+    elif sort == 6:
+        para += 'stat'
+    if sort != 0:
+        query = query.order_by(para)
     return render(request, 'company/job/applications.html', context={
-        "query":query,'username':request.user.company.name}
+        "query":query,'username':request.user.company.name, 'id':pos}
         )
 
 @login_required
@@ -98,7 +153,23 @@ def stud_profile(request):
 @student_required
 def student_view_applications(request):
     stud=request.user.student
-    query = Application.objects.all().select_related('pos').select_related('stud').filter(stud=stud).order_by('pos__test_date')
+    s =request.GET.get('sort', '0')
+    sort = int(s)
+    para = ''
+    if sort < 0:
+        para = '-'
+        sort *= -1
+    if sort == 1:
+        para += 'pos__pos_name'
+    elif sort == 2:
+        para += 'pos__cmp_name__name'
+    elif sort == 3:
+        para += 'pos__test_date'
+    elif sort == 4:
+        para += 'stat'
+    query = Application.objects.all().select_related('pos').select_related('stud').filter(stud=stud)
+    if(para!=''):
+        query = query.order_by(para)
     return render(request, 'student/position/myapplications.html', context={
         "query":query,'username':request.user.student.name
     })

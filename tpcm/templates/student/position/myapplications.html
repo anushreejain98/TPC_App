@@ -9,16 +9,46 @@
 		border-collapse: collapse;
 		padding: 15px;
 	}
+	i {
+	  display: inline-block;
+	  padding: 3px;
+	}
+	
+	.up {
+		border: solid green;
+		border-width: 0 3px 3px 0;
+		transform: rotate(-135deg);
+		-webkit-transform: rotate(-135deg);
+	}
+	
+	.down {
+		border: solid red;
+		border-width: 0 3px 3px 0;
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+	}
 </style>
 <body id="page-top">
 		<h1><b><center>My Applications</center></b></h1>
 	<table style="position: relative; margin-left: auto; margin-right:auto;">
 		<tr>
 			<th>Sr.no</th>
-            <th>Position</th>
-            <th>Company</th>
-			<th>Date of online test</th>
-			<th>Application Status</th>
+            <th>Position
+					<a href="/tpcm_app/student/myapplications?sort=1"><i class="up"></i></a>
+					<a href="/tpcm_app/student/myapplications?sort=-1"><i class="down"></i></a>
+			</th>
+            <th>Company
+					<a href="/tpcm_app/student/myapplications?sort=2"><i class="up"></i></a>
+					<a href="/tpcm_app/student/myapplications?sort=-2"><i class="down"></i></a>
+			</th>
+			<th>Date of online test
+					<a href="/tpcm_app/student/myapplications?sort=3"><i class="up"></i></a>
+					<a href="/tpcm_app/student/myapplications?sort=-3"><i class="down"></i></a>
+			</th>
+			<th>Application Status
+					<a href="/tpcm_app/student/myapplications?sort=4"><i class="up"></i></a>
+					<a href="/tpcm_app/student/myapplications?sort=-4"><i class="down"></i></a>
+			</th>
 		</tr>
 		{% for item in query %}
             <tr>
