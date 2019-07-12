@@ -8,15 +8,42 @@
 		border: 1px solid black;
 		padding: 15px;
 	}
+	i {
+	  display: inline-block;
+	  padding: 3px;
+	}
+	
+	.up {
+		border: solid green;
+		border-width: 0 3px 3px 0;
+		transform: rotate(-135deg);
+		-webkit-transform: rotate(-135deg);
+	}
+	
+	.down {
+		border: solid red;
+		border-width: 0 3px 3px 0;
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+	}
 </style>
 <h1><b><center>Company Position Applications</center></b></h1>
 <br>
 <table style="width:70%" class="center">
 		<tr>
 			<th>S.no</th>
-			<th>Position Name</th>
-			<th>Company Name</th>
-			<th>Date of Online test</th>
+			<th>Position Name
+					<a href="/tpcm_app/?sort=1"><i class="up"></i></a>
+					<a href="/tpcm_app/?sort=-1"><i class="down"></i></a>
+			</th>
+			<th>Company Name
+					<a href="/tpcm_app/?sort=2"><i class="up"></i></a>
+					<a href="/tpcm_app/?sort=-2"><i class="down"></i></a>
+			</th>
+			<th>Date of Online test
+					<a href="/tpcm_app/?sort=3"><i class="up"></i></a>
+					<a href="/tpcm_app/?sort=-3"><i class="down"></i></a>
+			</th>
 			<th>Create Application</th>
 		</tr>
 		{% for item in query %}
@@ -28,9 +55,15 @@
 			<td>{{item.cmp_name.name}}</td>
 			<td>{{item.test_date}}</td>
 			<td>
+				{% if item.id in app %}
 				<center>
 				<input type="button" value="Apply" onclick="window.location='/tpcm_app/student/position/desc?id={{item.id}}'"/>
 				</center>
+				{% else %}
+				<center>
+				Applied
+				</center>
+				{% endif %}
 			</td>
 		</tr>
 		{% endfor %}
